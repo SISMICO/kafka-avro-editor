@@ -13,6 +13,9 @@ repositories {
 }
 
 dependencies {
+    implementation("org.apache.avro:avro:1.11.0")
+    implementation("org.apache.avro:avro-compiler:1.11.0")
+
     testImplementation(kotlin("test"))
 }
 

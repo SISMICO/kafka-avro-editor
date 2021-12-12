@@ -1,0 +1,14 @@
+{
+  "type" : "record",
+  "name" : "Person",
+  "namespace" : "br.sismico.avro",
+  "doc" : "Person Avro Schema",
+  "fields" : [{
+    "name" : "name",
+    "type" : "string"
+  },
+  {
+    "name" : "birthDate",
+    "type" : "string"
+  }] 
+}
