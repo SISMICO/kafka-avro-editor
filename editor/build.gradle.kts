@@ -32,6 +32,9 @@ dependencies {
     implementation("io.confluent:kafka-streams-avro-serde:6.1.0")
     implementation("io.confluent:kafka-avro-serializer:5.2.1")
 
+    // PODAM
+    implementation("uk.co.jemos.podam:podam:7.2.7.RELEASE")
+
     testImplementation(kotlin("test"))
 }
 

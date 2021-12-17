@@ -21,7 +21,9 @@ fun main(args: Array<String>) {
     buildSchema()
     compileSchema()
     val myPerson = loadClass()
-    sendEvent(myPerson)
+    val str = JsonGenerator().generate()
+    println(str)
+    //sendEvent(myPerson)
     FromSchema().generateAvro("/home/leonardo/Projetos/kafka-avro-editor/schemas/simple.avsc")
 }
 
@@ -58,6 +60,7 @@ fun buildSchema() {
     val pathOutput = "/tmp/kafka-avro-editor/schemas/build"
     try {
         val compiler = SpecificCompiler(Schema.Parser().parse(File(pathSchema)))
+        compiler.setStringType(GenericData.StringType.String)
         compiler.compileToDestination(File(pathSchema), File(pathOutput))
     } catch (e: IOException) {
         throw e
@@ -113,9 +116,9 @@ fun loadClass(): Any {
 
         //val classToLoad = Class.forName("Person", true, cl);
         val classToLoad = cl.loadClass("br.sismico.avro.Person");
-        val setName = classToLoad.getDeclaredMethod("setName", CharSequence::class.java)
+        val setName = classToLoad.getDeclaredMethod("setName", String::class.java)
         val getName = classToLoad.getDeclaredMethod("getName")
-        val setBithdate = classToLoad.getDeclaredMethod("setBirthDate", CharSequence::class.java)
+        val setBithdate = classToLoad.getDeclaredMethod("setBirthDate", String::class.java)
         val writer = classToLoad.getDeclaredMethod("writeExternal", ObjectOutput::class.java)
         val instance = classToLoad.getDeclaredConstructor().newInstance()
 
