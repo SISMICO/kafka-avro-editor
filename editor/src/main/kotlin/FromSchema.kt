@@ -18,7 +18,7 @@ class FromSchema {
 
         val datum = GenericDatumWriter<GenericRecord>(schema)
         val fileWriter = DataFileWriter(datum)
-        fileWriter.create(schema, File("/tmp/kafka-avro-editor/schemas/avro/person.avro"))
+        fileWriter.create(schema, File("/tmp/kafka-avro-editor/schemas/build/br/sismico/avro/Person2.avro"))
         fileWriter.append(data)
         fileWriter.close()
     }
