@@ -21,8 +21,12 @@ dependencies {
     implementation("org.slf4j:slf4j-api:1.7.32")
     implementation("org.slf4j:slf4j-simple:1.7.32")
 
-    implementation("com.fasterxml.jackson.core:jackson-databind")
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+//    implementation("com.fasterxml.jackson.core:jackson-databind")
+//    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+
+//    implementation("com.fasterxml.jackson.core:jackson-core:2.9.10")
+//    implementation("com.fasterxml.jackson.core:jackson-databind:2.9.10")
+//    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.9.10")
 
     // Kafka
     implementation("org.apache.kafka:kafka-clients:2.8.1")
@@ -34,6 +38,10 @@ dependencies {
 
     // PODAM
     implementation("uk.co.jemos.podam:podam:7.2.7.RELEASE")
+
+    // Fuel
+    implementation("com.github.kittinunf.fuel:fuel:2.3.1")
+    implementation("com.github.kittinunf.fuel:fuel-jackson:2.3.1")
 
     testImplementation(kotlin("test"))
 }
