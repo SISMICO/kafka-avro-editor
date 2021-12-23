@@ -1,7 +1,7 @@
 import org.apache.avro.Schema
 import org.apache.avro.compiler.specific.SpecificCompiler
 import org.apache.avro.generic.GenericData
-import schemaregistry.SchemaRegistryConsole
+import schemaregistry.console.SchemaRegistryConsole
 import java.io.*
 import java.net.MalformedURLException
 import java.net.URL
