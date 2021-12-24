@@ -1,6 +1,6 @@
-package schemaregistry
+package editor.schemaregistry
 
-data class Schema(
+data class SubjectSchema(
     val topic: String,
     val schema: String
 )

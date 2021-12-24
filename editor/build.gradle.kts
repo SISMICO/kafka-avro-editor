@@ -3,6 +3,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     kotlin("jvm") version "1.6.0"
     application
+    id("org.jlleitschuh.gradle.ktlint") version "10.2.0"
 }
 
 group = "br.com.sismico"
@@ -10,7 +11,7 @@ version = "1.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
-    maven{
+    maven {
         url = uri("https://packages.confluent.io/maven/")
     }
 }
@@ -43,6 +44,9 @@ dependencies {
     implementation("com.github.kittinunf.fuel:fuel:2.3.1")
     implementation("com.github.kittinunf.fuel:fuel-jackson:2.3.1")
 
+    // Apache Commons Cli
+    implementation("commons-cli:commons-cli:1.5.0")
+
     testImplementation(kotlin("test"))
 }
 
@@ -52,6 +56,12 @@ tasks.test {
 
 tasks.withType<KotlinCompile>() {
     kotlinOptions.jvmTarget = "11"
+}
+
+tasks.withType<org.jlleitschuh.gradle.ktlint.tasks.GenerateReportsTask> {
+    reportsOutputDirectory.set(
+        project.layout.buildDirectory.dir("other/location/$name")
+    )
 }
 
 application {

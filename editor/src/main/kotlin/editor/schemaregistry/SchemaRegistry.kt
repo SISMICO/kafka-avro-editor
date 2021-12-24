@@ -1,4 +1,4 @@
-package schemaregistry
+package editor.schemaregistry
 
 import com.github.kittinunf.fuel.httpGet
 import com.github.kittinunf.fuel.jackson.responseObject
@@ -11,13 +11,13 @@ class SchemaRegistry(
 //
 //    }
 //
-    fun getAllSchemas(): List<Schema> {
+    fun getAllSchemas(): List<SubjectSchema> {
         return topicFinder.getAllTopics().map {
-            Schema(it, getSchemaFromSchemaRegistry(it))
+            SubjectSchema(it, getSchemaFromSchemaRegistry(it))
         }
     }
 
-    fun getSchema(topic: String): Schema {
+    fun getSchema(topic: String): SubjectSchema {
         val topics = getAllSchemas()
         return topics.filter { it.topic == topic }.getOrNull(0) ?: throw TopicNotFound(topic)
     }

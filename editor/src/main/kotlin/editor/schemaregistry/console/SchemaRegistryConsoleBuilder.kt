@@ -1,4 +1,4 @@
-package schemaregistry.console
+package editor.schemaregistry.console
 
 class SchemaRegistryConsoleBuilder {
     companion object {

@@ -1,4 +1,4 @@
-package schemaregistry
+package editor.schemaregistry
 
 import Properties
 import com.github.kittinunf.fuel.httpGet
