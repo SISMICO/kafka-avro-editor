@@ -2,18 +2,22 @@ package editor.schemaregistry
 
 import com.github.kittinunf.fuel.httpGet
 import com.github.kittinunf.fuel.jackson.responseObject
+import editor.Properties
 
 class SchemaRegistry(
     val topicFinder: TopicFinder = TopicFinder()
 ) {
 
-//    fun registerSchema(topic: String, schema: String) {
+    //    fun registerSchema(topic: String, schema: String) {
 //
 //    }
 //
     fun getAllSchemas(): List<SubjectSchema> {
         return topicFinder.getAllTopics().map {
-            SubjectSchema(it, getSchemaFromSchemaRegistry(it))
+            SubjectSchema(
+                extractTopicName(it),
+                getSchemaFromSchemaRegistry(it)
+            )
         }
     }
 
@@ -26,6 +30,9 @@ class SchemaRegistry(
         return "${Properties.schemaRegistryServer}/subjects/${topic}/versions/latest".httpGet()
             .responseObject<SchemaRegistryResponse>().third.get().schema
     }
+
+    private fun extractTopicName(subject: String) =
+        subject.substring(0, subject.length - 6)
 
     class TopicNotFound(topic: String) : Exception("Topic $topic Not Found")
 }

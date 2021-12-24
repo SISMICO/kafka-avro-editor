@@ -20,5 +20,4 @@ class SchemaRegistryConsole(
 
     private fun printSchema(subjectSchema: SubjectSchema) =
         println("${subjectSchema.topic}: ${subjectSchema.schema}")
-
 }

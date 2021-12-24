@@ -1,7 +1,4 @@
 import editor.EditorConsole
-import editor.SchemaBuilder
-import editor.SchemaCompiler
-import editor.schemaregistry.SchemaRegistry
 import java.io.File
 import java.io.FileOutputStream
 import java.io.ObjectOutput
@@ -12,14 +9,6 @@ import java.net.URLClassLoader
 
 fun main(args: Array<String>) {
     EditorConsole(args).run()
-}
-
-private fun buildSchemas() {
-    val schemas = SchemaRegistry().getAllSchemas()
-    val compiler = SchemaCompiler(Properties.outputAvscPath!!, Properties.outputJavaPath!!)
-    val builder = SchemaBuilder()
-    schemas.forEach { compiler.buildSchema(it) }
-    builder.buildSchemas(Properties.outputJavaPath!!)
 }
 
 fun loadClass(): Any {

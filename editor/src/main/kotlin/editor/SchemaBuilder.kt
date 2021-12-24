@@ -5,18 +5,8 @@ import javax.tools.*
 
 class SchemaBuilder {
 
-    fun buildSchemas(javaClassesPath: String) {
-        val classes = findJavaClasses(javaClassesPath)
+    fun buildSchemas(classes: List<File>) {
         classes.forEach { build(it) }
-    }
-
-    private fun findJavaClasses(javaClassesPath: String): List<File> {
-        val list = mutableListOf<File>()
-        File(javaClassesPath).listFiles { file -> file.extension == "java" }
-            .forEach { list.add(it) }
-        File(javaClassesPath).listFiles { file -> file.isDirectory }
-            .forEach { list.addAll(findJavaClasses(it.path)) }
-        return list
     }
 
     private fun build(file: File) {

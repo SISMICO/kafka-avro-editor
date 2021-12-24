@@ -4,6 +4,7 @@ plugins {
     kotlin("jvm") version "1.6.0"
     application
     id("org.jlleitschuh.gradle.ktlint") version "10.2.0"
+    id("org.jlleitschuh.gradle.ktlint-idea") version "10.2.0"
 }
 
 group = "br.com.sismico"

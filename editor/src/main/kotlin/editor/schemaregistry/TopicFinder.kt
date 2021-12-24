@@ -1,6 +1,6 @@
 package editor.schemaregistry
 
-import Properties
+import editor.Properties
 import com.github.kittinunf.fuel.httpGet
 import com.github.kittinunf.fuel.jackson.responseObject
 

@@ -1,11 +1,14 @@
 package editor
 
+import editor.jsonschema.JsonSchemaConsole
 import editor.schemaregistry.console.SchemaRegistryConsole
 import org.apache.commons.cli.*
 
 class EditorConsole(
     private val args: Array<String>,
-    private val schemaRegistry: SchemaRegistryConsole = SchemaRegistryConsole()
+    private val schemaRegistry: SchemaRegistryConsole = SchemaRegistryConsole(),
+    private val jsonSchema: JsonSchemaConsole = JsonSchemaConsole(),
+    private val editor: Editor = Editor(Properties.outputPath)
 ) {
 
     private val options: Options
@@ -21,11 +24,20 @@ class EditorConsole(
     }
 
     fun run() {
-        if (args.isEmpty())
+        if (args.isEmpty()) {
             printHelper(options)
+            return
+        }
 
-        if (cmd.hasOption(optionList))
+        if (cmd.hasOption(optionList)) {
             schemaRegistry.list(null)
+            return
+        }
+
+        if (cmd.hasOption(optionJson)) {
+            val topic = editor.getTopic(cmd.getOptionValue(optionJson))
+            jsonSchema.print(topic)
+        }
     }
 
     private fun configureCommandLine(options: Options, args: Array<String>): CommandLine {
@@ -53,5 +65,4 @@ class EditorConsole(
         .argName("topic")
         .desc("Create a json object from a topic")
         .build()
-
 }

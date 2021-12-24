@@ -8,28 +8,27 @@ import java.io.File
 import java.io.IOException
 
 class SchemaCompiler(
-    private val outputAvscPath: String,
-    private val outputJavaPath: String
+    private val outputPath: String
 ) {
-    fun buildSchema(subjectSchema: SubjectSchema) {
+    fun compileSchema(subjectSchema: SubjectSchema) {
         try {
-            createDirectoryStructure()
+            val outputCompilerPath = "$outputPath/${subjectSchema.topic}"
+            createDirectoryStructure(outputCompilerPath)
             val compiler = SpecificCompiler(Schema.Parser().parse(subjectSchema.schema))
             compiler.setStringType(GenericData.StringType.String)
-            compiler.compileToDestination(saveSchema(subjectSchema), File(outputJavaPath))
+            compiler.compileToDestination(saveSchema(outputCompilerPath, subjectSchema), File(outputCompilerPath))
         } catch (e: IOException) {
             throw e
         }
     }
 
-    private fun saveSchema(subjectSchema: SubjectSchema): File {
-        val file = File("$outputAvscPath/${subjectSchema.topic}.avsc")
+    private fun saveSchema(outputPath: String, subjectSchema: SubjectSchema): File {
+        val file = File("$outputPath/${subjectSchema.topic}.avsc")
         file.writeText(subjectSchema.schema)
         return file
     }
 
-    private fun createDirectoryStructure() {
-        File(outputAvscPath).mkdirs()
-        File(outputJavaPath).mkdirs()
+    private fun createDirectoryStructure(path: String) {
+        File(path).mkdirs()
     }
 }
