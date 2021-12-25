@@ -7,16 +7,13 @@ import org.apache.avro.generic.GenericData
 import java.io.File
 import java.io.IOException
 
-class SchemaCompiler(
-    private val outputPath: String
-) {
-    fun compileSchema(subjectSchema: SubjectSchema) {
+class SchemaCompiler() {
+    fun compileSchema(subjectSchema: SubjectSchema, outputPath: String) {
         try {
-            val outputCompilerPath = "$outputPath/${subjectSchema.topic}"
-            createDirectoryStructure(outputCompilerPath)
+            createDirectoryStructure(outputPath)
             val compiler = SpecificCompiler(Schema.Parser().parse(subjectSchema.schema))
             compiler.setStringType(GenericData.StringType.String)
-            compiler.compileToDestination(saveSchema(outputCompilerPath, subjectSchema), File(outputCompilerPath))
+            compiler.compileToDestination(saveSchema(outputPath, subjectSchema), File(outputPath))
         } catch (e: IOException) {
             throw e
         }

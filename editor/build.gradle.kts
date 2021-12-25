@@ -5,6 +5,7 @@ plugins {
     application
     id("org.jlleitschuh.gradle.ktlint") version "10.2.0"
     id("org.jlleitschuh.gradle.ktlint-idea") version "10.2.0"
+    id("com.github.johnrengelman.shadow") version "7.1.1"
 }
 
 group = "br.com.sismico"
@@ -26,9 +27,9 @@ dependencies {
 //    implementation("com.fasterxml.jackson.core:jackson-databind")
 //    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 
-//    implementation("com.fasterxml.jackson.core:jackson-core:2.9.10")
-//    implementation("com.fasterxml.jackson.core:jackson-databind:2.9.10")
-//    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.9.10")
+    implementation("com.fasterxml.jackson.core:jackson-core:2.12.5")
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.12.5")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.12.5")
 
     // Kafka
     implementation("org.apache.kafka:kafka-clients:2.8.1")
@@ -55,7 +56,7 @@ tasks.test {
     useJUnitPlatform()
 }
 
-tasks.withType<KotlinCompile>() {
+tasks.withType<KotlinCompile> {
     kotlinOptions.jvmTarget = "11"
 }
 
@@ -63,6 +64,12 @@ tasks.withType<org.jlleitschuh.gradle.ktlint.tasks.GenerateReportsTask> {
     reportsOutputDirectory.set(
         project.layout.buildDirectory.dir("other/location/$name")
     )
+}
+
+tasks.withType<Jar> {
+    manifest {
+        attributes["Main-Class"] = "MainKt"
+    }
 }
 
 application {

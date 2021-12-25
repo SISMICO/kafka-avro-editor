@@ -1,18 +1,25 @@
 package editor
 
 import java.io.File
-import javax.tools.*
+import javax.tools.DiagnosticCollector
+import javax.tools.JavaCompiler
+import javax.tools.JavaFileObject
+import javax.tools.StandardJavaFileManager
+import javax.tools.ToolProvider
 
 class SchemaBuilder {
 
     fun buildSchemas(classes: List<File>) {
-        classes.forEach { build(it) }
+        classes.groupBy { it.parent }
+            .forEach {
+                build(it.value)
+            }
     }
 
-    private fun build(file: File) {
+    private fun build(files: List<File>) {
         val compiler: JavaCompiler = ToolProvider.getSystemJavaCompiler()
         val fileManager: StandardJavaFileManager = compiler.getStandardFileManager(null, null, null)
-        val compilationUnits = fileManager.getJavaFileObjectsFromFiles(listOf(file))
+        val compilationUnits = fileManager.getJavaFileObjectsFromFiles(files)
         val diagnostics = DiagnosticCollector<JavaFileObject>()
         val task: JavaCompiler.CompilationTask = compiler.getTask(
             null,
@@ -31,5 +38,4 @@ class SchemaBuilder {
         )
         fileManager.close()
     }
-
 }

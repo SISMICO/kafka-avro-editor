@@ -1,10 +1,13 @@
 package editor
 
 import editor.jsonschema.JsonSchemaConsole
-import editor.kafka.KafkaSender
 import editor.kafka.KafkaSenderConsole
 import editor.schemaregistry.console.SchemaRegistryConsole
-import org.apache.commons.cli.*
+import org.apache.commons.cli.CommandLine
+import org.apache.commons.cli.DefaultParser
+import org.apache.commons.cli.HelpFormatter
+import org.apache.commons.cli.Option
+import org.apache.commons.cli.Options
 
 class EditorConsole(
     private val args: Array<String>,
@@ -78,7 +81,6 @@ class EditorConsole(
         .argName("topic")
         .desc("Create a json object from a topic.")
         .build()
-
 
     private fun createOptionSend(): Option = Option.builder()
         .option("s")

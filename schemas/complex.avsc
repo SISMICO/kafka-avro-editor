@@ -1,0 +1,84 @@
+{
+  "type": "record",
+  "name": "Invoice",
+  "namespace": "br.sismico.avro",
+  "doc": "Invoice Avro Schema",
+  "fields": [
+    {
+      "name": "Id",
+      "type": "string"
+    },
+    {
+      "name": "IssuedAt",
+      "type": "string"
+    },
+    {
+      "name": "Amount",
+      "type": "double"
+    },
+    {
+      "name": "Client",
+      "type": {
+        "type": "record",
+        "name": "Client",
+        "fields": [
+          {
+            "name": "Id",
+            "type": "string"
+          },
+          {
+            "name": "Name",
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "Items",
+      "type": {
+        "type": "array",
+        "items": {
+          "type": "record",
+          "name": "Item",
+          "fields": [
+            {
+              "name": "Id",
+              "type": "string"
+            },
+            {
+              "name": "Description",
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            {
+              "name": "Quantity",
+              "type": [
+                "null",
+                "int"
+              ]
+            },
+            {
+              "name": "UnitPrice",
+              "type": [
+                "null",
+                "double"
+              ]
+            },
+            {
+              "name": "TotalPrice",
+              "type": [
+                "null",
+                "double"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

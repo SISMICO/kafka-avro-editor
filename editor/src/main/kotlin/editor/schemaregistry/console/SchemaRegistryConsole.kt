@@ -1,7 +1,7 @@
 package editor.schemaregistry.console
 
-import editor.schemaregistry.SubjectSchema
 import editor.schemaregistry.SchemaRegistry
+import editor.schemaregistry.SubjectSchema
 
 class SchemaRegistryConsole(
     val schemaRegistry: SchemaRegistry = SchemaRegistry()

@@ -7,11 +7,6 @@ import editor.Properties
 class SchemaRegistry(
     val topicFinder: TopicFinder = TopicFinder()
 ) {
-
-    //    fun registerSchema(topic: String, schema: String) {
-//
-//    }
-//
     fun getAllSchemas(): List<SubjectSchema> {
         return topicFinder.getAllTopics().map {
             SubjectSchema(
@@ -27,7 +22,7 @@ class SchemaRegistry(
     }
 
     private fun getSchemaFromSchemaRegistry(topic: String): String {
-        return "${Properties.schemaRegistryServer}/subjects/${topic}/versions/latest".httpGet()
+        return "${Properties.schemaRegistryServer}/subjects/$topic/versions/latest".httpGet()
             .responseObject<SchemaRegistryResponse>().third.get().schema
     }
 

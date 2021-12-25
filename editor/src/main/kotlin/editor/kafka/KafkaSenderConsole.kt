@@ -28,15 +28,13 @@ class KafkaSenderConsole(
     private fun parseMessage(topic: EditorTopic, message: String): Any {
         val objectClass = loadClass(topic)
         val mapper = ObjectMapper()
-        val messageObject = mapper.readValue(message, objectClass)
-        return messageObject
+        return mapper.readValue(message, objectClass)
     }
 
     private fun loadClass(topic: EditorTopic): Class<*> {
         val url = topic.classPath.toURI().toURL()
         val urls = arrayOf<URL>(url)
         val cl: ClassLoader = URLClassLoader(urls, ClassLoader.getSystemClassLoader())
-        return cl.loadClass(topic.className);
+        return cl.loadClass(topic.className)
     }
-
 }
