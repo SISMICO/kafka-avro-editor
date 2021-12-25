@@ -1,23 +1,25 @@
 package editor.kafka
 
+import editor.EditorTopic
 import org.apache.kafka.clients.producer.ProducerRecord
 import org.apache.kafka.common.errors.SerializationException
+import java.net.URL
+import java.net.URLClassLoader
 
 class KafkaSender(
     val kafkaConfiguration: KafkaConfiguration = KafkaConfiguration()
 ) {
 
-    fun sendEvent(event: Any) {
-
+    fun send(topic: String, message: Any) {
         val producer = kafkaConfiguration.createProducer()
-        val key = "key1"
+        val key = null
 //    val pathSchema = "/home/leonardo/Projetos/kafka-avro-editor/schemas/simple.avsc"
 //    val schema = Schema.Parser().parse(File(pathSchema))
 //    val avroRecord: GenericRecord = GenericData.Record(schema)
 //    avroRecord.put("name", "Viviane Reis")
 //    avroRecord.put("birthDate", "1985-07-25")
 
-        val record = ProducerRecord<Any, Any>("topic1", key, event)
+        val record = ProducerRecord<Any, Any>(topic, key, message)
         try {
             producer.send(record)
         } catch (e: SerializationException) {
@@ -29,5 +31,4 @@ class KafkaSender(
             producer.close()
         }
     }
-
 }
