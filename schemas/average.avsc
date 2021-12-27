@@ -1,0 +1,40 @@
+{
+  "type": "record",
+  "name": "Invoice",
+  "namespace": "br.sismico.avro",
+  "doc": "Invoice Avro Schema",
+  "fields": [
+    {
+      "name": "Id",
+      "type": "string"
+    },
+    {
+      "name": "IssuedAt",
+      "type": "string"
+    },
+    {
+      "name": "Amount",
+      "type": "double"
+    },
+    {
+      "name": "Client",
+      "type": {
+        "type": "record",
+        "name": "InvoiceClient",
+        "fields": [
+          {
+            "name": "Id",
+            "type": "string"
+          },
+          {
+            "name": "Name",
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
