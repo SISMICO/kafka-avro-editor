@@ -23,26 +23,13 @@ class Editor(
     }
 
     private fun buildSchemas() {
-        val schemas = schemaRegistry.getAllSchemas()
-        schemas.forEach { compiler.compileSchema(it, "$outputEditorPath/${it.topic}") }
+        val subjects = schemaRegistry.getAllSubjects()
+        subjects.forEach {
+            val schema = schemaRegistry.getSchema(it)
+            compiler.compileSchema(schema, "$outputEditorPath/$it")
+        }
         builder.buildSchemas(listClasses())
     }
-
-//    private fun loadTopics() {
-//        findClasses(outputEditorPath, "class")
-//            .forEach {
-//                val topic = extractTopic(it.relativeTo(File(outputEditorPath)))
-//                val className = extractClassName(topic, it.relativeTo(File(outputEditorPath)))
-//                val classPath = File("$outputEditorPath/$topic")
-//                val schemaPath = findClasses(classPath.path, "avsc")[0]
-//                topics[topic] = EditorTopic(
-//                    topic,
-//                    className,
-//                    classPath,
-//                    schemaPath
-//                )
-//            }
-//    }
 
     private fun findClasses(javaClassesPath: String, extension: String): List<File> {
         val list = mutableListOf<File>()
@@ -52,21 +39,4 @@ class Editor(
             .forEach { list.addAll(findClasses(it.path, extension)) }
         return list
     }
-
-//    private fun extractTopic(path: File): String {
-//        var actual = path
-//        while (actual.parent != null) {
-//            actual = actual.parentFile
-//        }
-//        return actual.name
-//    }
-//    private fun extractClassName(topicName: String, path: File): String {
-//        var actual = path
-//        var className = path.nameWithoutExtension
-//        while (actual.parentFile.name != topicName) {
-//            actual = actual.parentFile
-//            className = "${actual.name}.$className"
-//        }
-//        return className
-//    }
 }
