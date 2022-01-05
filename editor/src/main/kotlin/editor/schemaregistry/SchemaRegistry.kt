@@ -7,22 +7,28 @@ import editor.Properties
 class SchemaRegistry(
     val topicFinder: TopicFinder = TopicFinder()
 ) {
-    fun getAllSchemas(): List<SubjectSchema> {
-        return topicFinder.getAllTopics().map {
-            SubjectSchema(
-                extractTopicName(it),
-                getSchemaFromSchemaRegistry(it)
-            )
-        }
+    fun getAllSubjects(): List<String> {
+        return topicFinder
+            .getAllTopics()
+            .map { extractTopicName(it) }
     }
 
+    fun hasSubject(topic: String) =
+        getAllSubjects().contains(topic)
+
     fun getSchema(topic: String): SubjectSchema {
-        val topics = getAllSchemas()
-        return topics.filter { it.topic == topic }.getOrNull(0) ?: throw TopicNotFound(topic)
+        val topics = getAllSubjects()
+        return if (topics.contains(topic))
+            SubjectSchema(
+                topic,
+                getSchemaFromSchemaRegistry(topic)
+            )
+        else
+            throw TopicNotFound(topic)
     }
 
     private fun getSchemaFromSchemaRegistry(topic: String): String {
-        return "${Properties.schemaRegistryServer}/subjects/$topic/versions/latest".httpGet()
+        return "${Properties.schemaRegistryServer}/subjects/$topic-value/versions/latest".httpGet()
             .responseObject<SchemaRegistryResponse>().third.get().schema
     }
 

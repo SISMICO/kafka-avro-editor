@@ -2,14 +2,34 @@ package editor
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import editor.kafka.KafkaSender
+import org.apache.commons.cli.CommandLine
+import org.apache.commons.cli.Option
 import java.net.URL
 import java.net.URLClassLoader
 
 class KafkaSenderConsole(
-    val sender: KafkaSender = KafkaSender()
-) {
+    val sender: KafkaSender = KafkaSender(),
+    private val editor: Editor = Editor(Properties.outputPath)
+) : EditorConsoleOption {
+    private val optionSender =
+        Option.builder()
+            .option("s")
+            .longOpt("send")
+            .hasArg()
+            .argName("topic")
+            .desc("Send a message to Kafka using Json. One message per line.")
+            .build()
+    override val options = listOf(optionSender)
 
-    fun send(topic: EditorTopic) {
+    override fun run(commandLine: CommandLine) {
+        if (commandLine.hasOption(optionSender)) {
+            val topic = commandLine.getOptionValue(optionSender)
+            val topicEditor = editor.getTopic(topic)
+            send(topicEditor)
+        }
+    }
+
+    private fun send(topic: EditorTopic) {
         var message: String? = null
         do {
             println("Insert a Json Message:")
