@@ -13,7 +13,7 @@ class Editor(
     private var topics = mapOf<String, EditorTopic>()
 
     fun getTopic(topic: String): EditorTopic {
-        buildSchemas()
+        buildSchema(topic)
         topics = loader.load(outputEditorPath)
         return topics[topic]!!
     }
@@ -22,13 +22,12 @@ class Editor(
         return findClasses(outputEditorPath, "java")
     }
 
-    private fun buildSchemas() {
-        val subjects = schemaRegistry.getAllSubjects()
-        subjects.forEach {
-            val schema = schemaRegistry.getSchema(it)
-            compiler.compileSchema(schema, "$outputEditorPath/$it")
+    private fun buildSchema(topic: String) {
+        if (schemaRegistry.hasSubject(topic)) {
+            val schema = schemaRegistry.getSchema(topic)
+            compiler.compileSchema(schema, "$outputEditorPath/$topic")
+            builder.buildSchemas(listClasses())
         }
-        builder.buildSchemas(listClasses())
     }
 
     private fun findClasses(javaClassesPath: String, extension: String): List<File> {

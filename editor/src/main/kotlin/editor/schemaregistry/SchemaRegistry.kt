@@ -13,6 +13,9 @@ class SchemaRegistry(
             .map { extractTopicName(it) }
     }
 
+    fun hasSubject(topic: String) =
+        getAllSubjects().contains(topic)
+
     fun getSchema(topic: String): SubjectSchema {
         val topics = getAllSubjects()
         return if (topics.contains(topic))

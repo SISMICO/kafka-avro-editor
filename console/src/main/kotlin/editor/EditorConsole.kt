@@ -7,10 +7,9 @@ import org.apache.commons.cli.Options
 
 class EditorConsole(
     private val args: Array<String>,
-    private val schemaRegistry: SchemaRegistryConsole = SchemaRegistryConsole(),
-    private val jsonSchema: JsonSchemaConsole = JsonSchemaConsole(),
-    private val sender: KafkaSenderConsole = KafkaSenderConsole(),
-    private val editor: Editor = Editor(Properties.outputPath)
+    schemaRegistry: SchemaRegistryConsole = SchemaRegistryConsole(),
+    jsonSchema: JsonSchemaConsole = JsonSchemaConsole(),
+    sender: KafkaSenderConsole = KafkaSenderConsole(),
 ) {
     private val cmd: CommandLine
     private val myOptions = mutableListOf<EditorConsoleOption>()
