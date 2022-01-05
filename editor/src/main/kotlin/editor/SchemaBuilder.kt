@@ -10,10 +10,7 @@ import javax.tools.ToolProvider
 class SchemaBuilder {
 
     fun buildSchemas(classes: List<File>) {
-        classes.groupBy { it.parent }
-            .forEach {
-                build(it.value)
-            }
+        build(classes)
     }
 
     private fun build(files: List<File>) {

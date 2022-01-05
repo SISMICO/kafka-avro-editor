@@ -18,15 +18,17 @@ class Editor(
         return topics[topic]!!
     }
 
-    private fun listClasses(): List<File> {
-        return findClasses(outputEditorPath, "java")
+    private fun listClasses(path: String): List<File> {
+        val files = findClasses(path, "java")
+        return files
     }
 
     private fun buildSchema(topic: String) {
         if (schemaRegistry.hasSubject(topic)) {
             val schema = schemaRegistry.getSchema(topic)
-            compiler.compileSchema(schema, "$outputEditorPath/$topic")
-            builder.buildSchemas(listClasses())
+            val topicPath = "$outputEditorPath/$topic"
+            compiler.compileSchema(schema, topicPath)
+            builder.buildSchemas(listClasses(topicPath))
         }
     }
 

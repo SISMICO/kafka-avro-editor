@@ -1,11 +1,11 @@
 package editor.schemaregistry
 
-import com.github.kittinunf.fuel.httpGet
 import com.github.kittinunf.fuel.jackson.responseObject
 import editor.Properties
 
 class SchemaRegistry(
-    val topicFinder: TopicFinder = TopicFinder()
+    val topicFinder: TopicFinder = TopicFinder(),
+    val request: SchemaRegistryRequest = SchemaRegistryRequest()
 ) {
     fun getAllSubjects(): List<String> {
         return topicFinder
@@ -28,7 +28,7 @@ class SchemaRegistry(
     }
 
     private fun getSchemaFromSchemaRegistry(topic: String): String {
-        return "${Properties.schemaRegistryServer}/subjects/$topic-value/versions/latest".httpGet()
+        return request.get("${Properties.schemaRegistryServer}/subjects/$topic-value/versions/latest")
             .responseObject<SchemaRegistryResponse>().third.get().schema
     }
 

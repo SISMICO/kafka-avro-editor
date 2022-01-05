@@ -8,19 +8,44 @@ import java.util.Properties
 class KafkaConfiguration {
     private val kafkaServer: String
     private val schemaRegistryServer: String
+    private val schemaRegistryUser: String?
+    private val schemaRegistryPassword: String?
+    private val kafkaSaslMechanism: String?
+    private val kafkaSecurityProtocol: String?
+    private val kafkaSaslJaasConfig: String?
 
     init {
         kafkaServer = editor.Properties.kafkaServer
         schemaRegistryServer = editor.Properties.schemaRegistryServer
+        schemaRegistryUser = editor.Properties.schemaRegistryUser
+        schemaRegistryPassword = editor.Properties.schemaRegistryPassword
+        kafkaSaslMechanism = editor.Properties.kafkaSaslMechanism
+        kafkaSecurityProtocol = editor.Properties.kafkaSecurityProtocol
+        kafkaSaslJaasConfig = editor.Properties.kafkaSaslJaasConfig
     }
 
     fun createProducer(): KafkaProducer<Any, Any> {
         val props = Properties()
-        props[ProducerConfig.BOOTSTRAP_SERVERS_CONFIG] = kafkaServer
         props[ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG] = StringSerializer::class.java
         props[ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG] =
             io.confluent.kafka.serializers.KafkaAvroSerializer::class.java
-        props["schema.registry.url"] = schemaRegistryServer
+        configureKafkaServer(props)
+        configureSchemaRegistry(props)
         return KafkaProducer(props)
+    }
+
+    private fun configureSchemaRegistry(props: Properties) {
+        props["schema.registry.url"] = schemaRegistryServer
+        schemaRegistryUser?.let {
+            props["basic.auth.credentials.source"] = "USER_INFO"
+            props["schema.registry.basic.auth.user.info"] = "$schemaRegistryUser:$schemaRegistryPassword"
+        }
+    }
+
+    private fun configureKafkaServer(props: Properties) {
+        props[ProducerConfig.BOOTSTRAP_SERVERS_CONFIG] = kafkaServer
+        kafkaSaslMechanism?.let { props["sasl.mechanism"] = kafkaSaslMechanism }
+        kafkaSecurityProtocol?.let { props["security.protocol"] = kafkaSecurityProtocol }
+        kafkaSaslJaasConfig?.let { props["sasl.jaas.config"] = kafkaSaslJaasConfig }
     }
 }
