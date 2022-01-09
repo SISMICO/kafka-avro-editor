@@ -32,7 +32,7 @@ class SchemaRegistryConsole(
 
     private fun list() {
         println("Listing Topics")
-        SchemaRegistry().getAllSubjects().forEach {
+        SchemaRegistry().getAllTopics().forEach {
             println(it)
         }
     }
