@@ -2,7 +2,6 @@ package editor.schemaregistry.api
 
 import com.github.kittinunf.fuel.jackson.responseObject
 import editor.Properties
-import editor.schemaregistry.SchemaRegistryRequest
 
 class SchemaApi(
     val request: SchemaRegistryRequest = SchemaRegistryRequest()
