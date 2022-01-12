@@ -14,8 +14,8 @@ class KafkaSender(
         val record = ProducerRecord<Any, Any>(topic, key, message)
         try {
             producer.send(record)
-        } catch (e: SerializationException) {
-            throw e
+        } catch (e: Exception) {
+            throw KafkaSenderException(e)
         } finally {
             producer.flush()
             producer.close()

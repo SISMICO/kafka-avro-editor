@@ -1,6 +1,7 @@
 package editor
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import editor.exceptions.ParserException
 import editor.kafka.KafkaSender
 import org.apache.commons.cli.CommandLine
 import org.apache.commons.cli.Option
@@ -46,9 +47,13 @@ class KafkaSenderConsole(
     }
 
     private fun parseMessage(topic: EditorTopic, message: String): Any {
-        val objectClass = loadClass(topic)
-        val mapper = ObjectMapper()
-        return mapper.readValue(message, objectClass)
+        try {
+            val objectClass = loadClass(topic)
+            val mapper = ObjectMapper()
+            return mapper.readValue(message, objectClass)
+        } catch (ex: Exception) {
+            throw ParserException("Failed to parse message: $message", ex)
+        }
     }
 
     private fun loadClass(topic: EditorTopic): Class<*> {
