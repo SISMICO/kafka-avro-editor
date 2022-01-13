@@ -23,11 +23,11 @@ dependencies {
 
     implementation("org.apache.avro:avro:1.11.0")
     implementation("org.apache.avro:avro-compiler:1.11.0")
-    implementation("org.slf4j:slf4j-api:1.7.32")
-    implementation("org.slf4j:slf4j-simple:1.7.32")
 
-//    implementation("com.fasterxml.jackson.core:jackson-databind")
-//    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+    // Loggin
+    implementation("org.slf4j:slf4j-api:1.7.32")
+    implementation("ch.qos.logback:logback-classic:1.2.10")
+    implementation("ch.qos.logback:logback-core:1.2.10")
 
     implementation("com.fasterxml.jackson.core:jackson-core:2.12.5")
     implementation("com.fasterxml.jackson.core:jackson-databind:2.12.5")

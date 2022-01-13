@@ -1,4 +1,4 @@
-package editor.schemaregistry
+package editor.schemaregistry.api
 
 import com.github.kittinunf.fuel.core.Headers
 import com.github.kittinunf.fuel.core.Request

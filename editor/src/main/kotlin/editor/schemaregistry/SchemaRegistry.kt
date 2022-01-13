@@ -1,39 +1,36 @@
 package editor.schemaregistry
 
-import com.github.kittinunf.fuel.jackson.responseObject
-import editor.Properties
+import editor.schemaregistry.api.SchemaApi
+import editor.schemaregistry.api.SubjectApi
 
 class SchemaRegistry(
-    val topicFinder: TopicFinder = TopicFinder(),
-    val request: SchemaRegistryRequest = SchemaRegistryRequest()
+    private val subjectApi: SubjectApi = SubjectApi(),
+    private val schemaApi: SchemaApi = SchemaApi()
 ) {
-    fun getAllSubjects(): List<String> {
-        return topicFinder
-            .getAllTopics()
+    companion object {
+        const val SUBJECT_SUFIX_LENGTH = 6
+    }
+
+    fun getAllTopics(): List<String> {
+        return subjectApi
+            .getAllSubjects()
             .map { extractTopicName(it) }
     }
 
     fun hasSubject(topic: String) =
-        getAllSubjects().contains(topic)
+        getAllTopics().contains(topic)
 
     fun getSchema(topic: String): SubjectSchema {
-        val topics = getAllSubjects()
+        val topics = getAllTopics()
         return if (topics.contains(topic))
             SubjectSchema(
                 topic,
-                getSchemaFromSchemaRegistry(topic)
+                schemaApi.getSchemaFromSchemaRegistry(topic)
             )
         else
-            throw TopicNotFound(topic)
-    }
-
-    private fun getSchemaFromSchemaRegistry(topic: String): String {
-        return request.get("${Properties.schemaRegistryServer}/subjects/$topic-value/versions/latest")
-            .responseObject<SchemaRegistryResponse>().third.get().schema
+            throw TopicNotFoundException(topic)
     }
 
     private fun extractTopicName(subject: String) =
-        subject.substring(0, subject.length - 6)
-
-    class TopicNotFound(topic: String) : Exception("Topic $topic Not Found")
+        subject.substring(0, subject.length - SUBJECT_SUFIX_LENGTH)
 }
