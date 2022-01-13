@@ -10,6 +10,7 @@ plugins {
 
 group = "br.com.sismico.kafka-avro-editor"
 version = "1.0-SNAPSHOT"
+var ktor_version = "1.6.7"
 
 repositories {
     mavenCentral()
@@ -57,6 +58,10 @@ dependencies {
 //    implementation("commons-cli:commons-cli:1.5.0")
 
     testImplementation(kotlin("test"))
+    testImplementation("io.ktor:ktor-client-mock:$ktor_version")
+    testImplementation("io.ktor:ktor-server-test-host:$ktor_version")
+    testImplementation("org.jetbrains.kotlin:kotlin-test:1.6.0")
+
 }
 
 tasks.test {

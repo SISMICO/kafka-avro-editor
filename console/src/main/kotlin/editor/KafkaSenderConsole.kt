@@ -31,7 +31,7 @@ class KafkaSenderConsole(
     }
 
     private fun send(topic: EditorTopic) {
-        var message: String? = null
+        var message: String?
         do {
             println("Insert a Json Message:")
             message = readMessage()
