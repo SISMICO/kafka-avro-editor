@@ -1,0 +1,4 @@
+.panel {
+    width: -webkit-fill-available;
+    border: 1px solid red;
+}

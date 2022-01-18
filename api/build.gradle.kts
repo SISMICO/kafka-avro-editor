@@ -61,7 +61,6 @@ dependencies {
     testImplementation("io.ktor:ktor-client-mock:$ktor_version")
     testImplementation("io.ktor:ktor-server-test-host:$ktor_version")
     testImplementation("org.jetbrains.kotlin:kotlin-test:1.6.0")
-
 }
 
 tasks.test {
@@ -85,5 +84,5 @@ tasks.withType<Jar> {
 }
 
 application {
-    mainClass.set("MainKt")
+    mainClass.set("api/MainKt")
 }

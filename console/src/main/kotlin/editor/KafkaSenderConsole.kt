@@ -1,12 +1,8 @@
 package editor
 
-import com.fasterxml.jackson.databind.ObjectMapper
-import editor.exceptions.ParserException
 import editor.kafka.KafkaSender
 import org.apache.commons.cli.CommandLine
 import org.apache.commons.cli.Option
-import java.net.URL
-import java.net.URLClassLoader
 
 class KafkaSenderConsole(
     val sender: KafkaSender = KafkaSender(),
@@ -36,7 +32,7 @@ class KafkaSenderConsole(
             println("Insert a Json Message:")
             message = readMessage()
             if (!message.isNullOrEmpty()) {
-                val messageObject = parseMessage(topic, message)
+                val messageObject = topic.parse(message)
                 sender.send(topic.topic, messageObject)
             }
         } while (!message.isNullOrEmpty())
@@ -44,22 +40,5 @@ class KafkaSenderConsole(
 
     private fun readMessage(): String? {
         return readLine()
-    }
-
-    private fun parseMessage(topic: EditorTopic, message: String): Any {
-        try {
-            val objectClass = loadClass(topic)
-            val mapper = ObjectMapper()
-            return mapper.readValue(message, objectClass)
-        } catch (ex: Exception) {
-            throw ParserException("Failed to parse message: $message", ex)
-        }
-    }
-
-    private fun loadClass(topic: EditorTopic): Class<*> {
-        val url = topic.classPath.toURI().toURL()
-        val urls = arrayOf<URL>(url)
-        val cl: ClassLoader = URLClassLoader(urls, ClassLoader.getSystemClassLoader())
-        return cl.loadClass(topic.className)
     }
 }

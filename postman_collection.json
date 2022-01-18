@@ -1,0 +1,77 @@
+{
+	"info": {
+		"_postman_id": "9e3bd4d1-fcc0-4688-bb62-13bf78f51f89",
+		"name": "Kafka Avro Editor",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "List Topic",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/topics",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"topics"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Json Schema",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/json/invoice",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"json",
+						"invoice"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Send Message",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"id\":\"R_MJfoHw04\",\"client\":{\"name\":\"PPpOyu8uGw\",\"id\":\"KVKzvFbmz1\"},\"issuedAt\":\"BwbYUtLKgj\",\"amount\":0.5424803361521557,\"items\":[{\"id\":\"owRtMtzNR1\",\"description\":\"G81ZgyU3Dn\",\"quantity\":2055181293,\"unitPrice\":0.9043997284798051,\"totalPrice\":0.636742465886109},{\"id\":\"P69weVQTns\",\"description\":\"mqqdpsWtqt\",\"quantity\":1125990039,\"unitPrice\":0.07138173482426739,\"totalPrice\":0.8073917226531333},{\"id\":\"OnVgml71VA\",\"description\":\"F0tvud1LPX\",\"quantity\":1215541263,\"unitPrice\":0.8115561967491796,\"totalPrice\":0.4581085914093201},{\"id\":\"bauK6x1pBo\",\"description\":\"5QdmA5x9SP\",\"quantity\":468861313,\"unitPrice\":0.3637868413079209,\"totalPrice\":0.13808105583036345},{\"id\":\"Jke7mWkmb_\",\"description\":\"mRXdJ09zlv\",\"quantity\":618424805,\"unitPrice\":0.6836241570687913,\"totalPrice\":0.859547460703229}]}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/send/invoice",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"send",
+						"invoice"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

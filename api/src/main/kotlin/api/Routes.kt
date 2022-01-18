@@ -5,11 +5,15 @@ import editor.Properties
 import editor.jsonschema.JsonGenerator
 import editor.kafka.KafkaSender
 import editor.schemaregistry.SchemaRegistry
-import io.ktor.application.*
-import io.ktor.http.*
-import io.ktor.request.*
-import io.ktor.response.*
-import io.ktor.routing.*
+import io.ktor.application.Application
+import io.ktor.application.call
+import io.ktor.http.HttpStatusCode
+import io.ktor.request.receiveText
+import io.ktor.response.respond
+import io.ktor.response.respondText
+import io.ktor.routing.get
+import io.ktor.routing.post
+import io.ktor.routing.routing
 
 fun Application.api(
     editor: Editor = Editor(Properties.outputPath),
@@ -34,7 +38,7 @@ fun Application.api(
 
         post("/send/{topic}") {
             val topic = editor.getTopic(call.parameters["topic"]!!)
-            sender.send(topic.topic, call.receiveText())
+            sender.send(topic.topic, topic.parse(call.receiveText()))
             call.respond(HttpStatusCode.OK, "OK")
         }
     }
