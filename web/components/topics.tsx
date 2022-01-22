@@ -20,17 +20,19 @@ export default function Topics() {
 
     return (
         <>
-            <div className={styles.panel}>
-                <h1>Topics</h1>
-                <ul>
-                    {data.map((topic) => (
-                        <li key={topic} onClick={(e) => handleClick(e, topic)}>{topic}</li>
-                    ))}
-                </ul>
+            <div className={styles.group}>
+                <div className={styles.topics_panel}>
+                    <h1>Topics</h1>
+                    <ul>
+                        {data.map((topic) => (
+                            <li key={topic} onClick={(e) => handleClick(e, topic)}>{topic}</li>
+                        ))}
+                    </ul>
+                </div>
+                {state.selectedTopic != "" &&
+                    <Content topic={state.selectedTopic}></Content>
+                }
             </div>
-            {state.selectedTopic != "" &&
-                <Content topic={state.selectedTopic}></Content>
-            }
         </>
     )
 }

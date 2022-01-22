@@ -12,26 +12,34 @@ export default function Content(props: any) {
     function generateExample() {
         //const { data, error } = useSWR<string, Error>(`http://localhost:8080/json/${props.topic}`, fetcher)
         getTopics(props.topic)
-        .then((data) =>
-            setState(JSON.stringify(data, null, 4))
-        );
+            .then((data) =>
+                setState(JSON.stringify(data, null, 4))
+            );
 
         //if (error) return <div>Failed to load</div>
         //if (!data) return <div>Loading...</div>
     }
 
+    function sendEvent() {
+        console.log("Send Event");
+    }
+
     return (
         <>
-            <div className={styles.panel}>
-                <h2>Topic: {props.topic}</h2>
-                <button onClick={generateExample}>Generate Example</button>
-                <input type="text" value={state}></input>
-                <textarea
-                    rows={20}
-                    cols={100}
-                    onChange={e => setState(e.target.value)}
-                    value={state}>
-                </textarea>
+            <div className={styles.message_panel}>
+                <h1>Selected Topic: <span>{props.topic}</span></h1>
+                <div>
+                    <button onClick={generateExample}>Generate Example</button>
+                </div>
+                <div>
+                    <textarea
+                        onChange={e => setState(e.target.value)}
+                        value={state}>
+                    </textarea>
+                </div>
+                <div>
+                    <button onClick={sendEvent}>Send Event</button>
+                </div>
             </div>
         </>
     )

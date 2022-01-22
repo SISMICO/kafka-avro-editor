@@ -3,16 +3,17 @@
 }
 
 .main {
-  min-height: 100vh;
+  min-height: 92vh;
   padding: 4rem 0;
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
 }
 
 .footer {
+  min-height: 8vh;
   display: flex;
   flex: 1;
   padding: 2rem 0;
