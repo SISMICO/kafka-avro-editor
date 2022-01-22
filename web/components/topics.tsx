@@ -8,7 +8,7 @@ const fetcher = (url: RequestInfo) => fetch(url).then((res) => res.json());
 
 export default function Topics() {
     const { data, error } = useSWR<string[], Error>('http://localhost:8080/topics', fetcher);
-    const [state, setstate] = useState({selectedTopic:""})
+    const [state, setstate] = useState({ selectedTopic: "" })
 
     if (error) return <div>Failed to load</div>
     if (!data) return <div>Loading...</div>
@@ -24,11 +24,13 @@ export default function Topics() {
                 <h1>Topics</h1>
                 <ul>
                     {data.map((topic) => (
-                        <li onClick={(e) => handleClick(e, topic)}>{topic}</li>
+                        <li key={topic} onClick={(e) => handleClick(e, topic)}>{topic}</li>
                     ))}
                 </ul>
             </div>
-            <Content topic={state.selectedTopic}></Content>
+            {state.selectedTopic != "" &&
+                <Content topic={state.selectedTopic}></Content>
+            }
         </>
     )
 }
