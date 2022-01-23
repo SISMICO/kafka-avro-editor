@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import useSWR from 'swr';
 import styles from '../styles/Content.module.css';
-import getTopics from '../services/serviceTopic';
+import { getTopics, sendEvent } from '../services/serviceTopic';
 
 //const fetcher = (url: RequestInfo) => fetch(url).then((res) => JSON.stringify(res.json(), null, 4))
 const fetcher = (url: RequestInfo) => fetch(url).then((res) => res.json())
@@ -12,7 +12,7 @@ export default function Content(props: any) {
     function generateExample() {
         //const { data, error } = useSWR<string, Error>(`http://localhost:8080/json/${props.topic}`, fetcher)
         getTopics(props.topic)
-            .then((data) =>
+            .then((data: any) =>
                 setState(JSON.stringify(data, null, 4))
             );
 
@@ -20,8 +20,8 @@ export default function Content(props: any) {
         //if (!data) return <div>Loading...</div>
     }
 
-    function sendEvent() {
-        console.log("Send Event");
+    function send() {
+        sendEvent(props.topic, state);
     }
 
     return (
@@ -38,7 +38,7 @@ export default function Content(props: any) {
                     </textarea>
                 </div>
                 <div>
-                    <button onClick={sendEvent}>Send Event</button>
+                    <button onClick={send}>Send Event</button>
                 </div>
             </div>
         </>

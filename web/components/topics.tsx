@@ -25,7 +25,9 @@ export default function Topics() {
                     <h1>Topics</h1>
                     <ul>
                         {data.map((topic) => (
-                            <li key={topic} onClick={(e) => handleClick(e, topic)}>{topic}</li>
+                            <a href='#' key={topic} onClick={(e) => handleClick(e, topic)}>
+                                <li key={topic}>{topic}</li>
+                            </a>
                         ))}
                     </ul>
                 </div>
