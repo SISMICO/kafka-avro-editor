@@ -17,29 +17,13 @@ class JsonGenerator {
 
     fun generate(topic: EditorTopic): String {
         val factory: PodamFactory = PodamFactoryImpl()
-        val myPojo = factory.manufacturePojoWithFullData(loadClass(topic))
+        val myPojo = factory.manufacturePojoWithFullData(topic.loadClass())
         val mapper = ObjectMapper().registerKotlinModule()
         mapper.addMixIn(
             SpecificRecord::class.java,
             JacksonIgnoreAvroPropertiesMixIn::class.java
         )
         return mapper.writeValueAsString(myPojo)
-    }
-
-    private fun loadClass(topic: EditorTopic): Class<*> {
-        val url = topic.classPath.toURI().toURL()
-        val urls = arrayOf<URL>(url)
-        val cl: ClassLoader = URLClassLoader(urls, ClassLoader.getSystemClassLoader())
-        return cl.loadClass(topic.className)
-    }
-
-    private fun findClasses(javaClassesPath: String, extension: String): List<File> {
-        val list = mutableListOf<File>()
-        File(javaClassesPath).listFiles { file -> file.extension == extension && !file.name.contains("$") }
-            .forEach { list.add(it) }
-        File(javaClassesPath).listFiles { file -> file.isDirectory }
-            .forEach { list.addAll(findClasses(it.path, extension)) }
-        return list
     }
 }
 

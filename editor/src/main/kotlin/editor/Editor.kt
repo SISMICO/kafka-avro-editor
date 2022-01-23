@@ -1,6 +1,7 @@
 package editor
 
 import editor.schemaregistry.SchemaRegistry
+import editor.schemaregistry.TopicNotFoundException
 import java.io.File
 
 class Editor(
@@ -15,7 +16,7 @@ class Editor(
     fun getTopic(topic: String): EditorTopic {
         buildSchema(topic)
         topics = loader.load(outputEditorPath)
-        return topics[topic]!!
+        return topics[topic] ?: throw TopicNotFoundException(topic)
     }
 
     private fun listClasses(path: String): List<File> {

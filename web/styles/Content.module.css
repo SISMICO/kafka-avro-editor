@@ -1,0 +1,13 @@
+.message_panel {
+    width: -webkit-fill-available;
+    border: 1px solid red;
+}
+
+.message_panel h1 span {
+    font-weight: normal;
+}
+
+.message_panel textarea {
+    width: -webkit-fill-available;
+    height: 50vh;
+}
