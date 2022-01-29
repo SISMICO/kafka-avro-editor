@@ -1,13 +1,13 @@
 function getTopics(topic: string) {
-    return fetch(`http://localhost:8080/json/${topic}`, {
+    return fetch(`${process.env.NEXT_PUBLIC_BACKEND_HOST}/json/${topic}`, {
         method: 'get'
-    })
+    })  
         .then(res => res.json())
         .catch(console.log);
 }
 
 function sendEvent(topic: string, message: string) {
-    return fetch(`http://localhost:8080/send/${topic}`, {
+    return fetch(`${process.env.NEXT_PUBLIC_BACKEND_HOST}/send/${topic}`, {
         method: 'post',
         body: message
     })

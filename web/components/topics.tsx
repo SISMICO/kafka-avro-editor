@@ -7,7 +7,7 @@ import Content from '../components/content'
 const fetcher = (url: RequestInfo) => fetch(url).then((res) => res.json());
 
 export default function Topics() {
-    const { data, error } = useSWR<string[], Error>('http://localhost:8080/topics', fetcher);
+    const { data, error } = useSWR<string[], Error>(`${process.env.NEXT_PUBLIC_BACKEND_HOST}/topics`, fetcher);
     const [state, setstate] = useState({ selectedTopic: "" })
 
     if (error) return <div>Failed to load</div>

@@ -1,0 +1,29 @@
+FROM node:16-alpine AS node-deps
+RUN apk add --no-cache libc6-compat
+WORKDIR /app
+COPY web/package.json web/package-lock.json ./
+RUN npm ci
+
+FROM node:16-alpine AS node-builder
+WORKDIR /app
+COPY --from=node-deps /app/node_modules ./node_modules
+COPY web .
+RUN npm run build
+
+# -----------------------------------------------------------------------------
+
+FROM gradle:7.1 as builder
+USER root
+ENV APP_DIR /app
+WORKDIR $APP_DIR
+COPY . $APP_DIR
+COPY --from=node-builder /app/out/ $APP_DIR/api/src/main/resources/web/
+RUN gradle build -x test
+USER guest
+
+# -----------------------------------------------------------------------------
+
+FROM openjdk:11-slim-buster
+WORKDIR /app
+COPY --from=builder /app/api/build/libs/api-*all.jar /app/api.jar
+ENTRYPOINT ["java", "-jar", "/app/api.jar"]
