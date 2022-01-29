@@ -9,9 +9,6 @@ import org.apache.avro.specific.SpecificData
 import org.apache.avro.specific.SpecificRecord
 import uk.co.jemos.podam.api.PodamFactory
 import uk.co.jemos.podam.api.PodamFactoryImpl
-import java.io.File
-import java.net.URL
-import java.net.URLClassLoader
 
 class JsonGenerator {
 

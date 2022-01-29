@@ -1,7 +1,6 @@
 package editor.kafka
 
 import org.apache.kafka.clients.producer.ProducerRecord
-import org.apache.kafka.common.errors.SerializationException
 
 class KafkaSender(
     val kafkaConfiguration: KafkaConfiguration = KafkaConfiguration()

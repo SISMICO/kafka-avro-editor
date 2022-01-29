@@ -7,7 +7,6 @@ import org.apache.commons.cli.Options
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
-
 class EditorConsole(
     private val args: Array<String>,
     schemaRegistry: SchemaRegistryConsole = SchemaRegistryConsole(),
@@ -45,7 +44,6 @@ class EditorConsole(
         } catch (ex: Exception) {
             logger.error("Ops, we got an error: ${ex.message}")
         }
-
     }
 
     private fun configureCommandLine(args: Array<String>): CommandLine {

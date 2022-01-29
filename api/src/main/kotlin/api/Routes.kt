@@ -8,6 +8,9 @@ import editor.schemaregistry.SchemaRegistry
 import io.ktor.application.Application
 import io.ktor.application.call
 import io.ktor.http.HttpStatusCode
+import io.ktor.http.content.defaultResource
+import io.ktor.http.content.resources
+import io.ktor.http.content.static
 import io.ktor.request.receiveText
 import io.ktor.response.respond
 import io.ktor.response.respondText
@@ -23,8 +26,8 @@ fun Application.api(
 ) {
 
     routing {
-        get("/") {
-            call.respondText("Welcome to Kafka Avro Editor API ;)")
+        get("/hello") {
+            call.respondText("Welcome to Kafka Avro Editor API ;) ${System.getProperty("user.dir")}")
         }
 
         get("/topics") {
@@ -40,6 +43,11 @@ fun Application.api(
             val topic = editor.getTopic(call.parameters["topic"]!!)
             sender.send(topic.topic, topic.parse(call.receiveText()))
             call.respond(HttpStatusCode.OK, "OK")
+        }
+
+        static("/") {
+            resources("web/.")
+            defaultResource("web/index.html")
         }
     }
 }
