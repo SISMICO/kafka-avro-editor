@@ -3,6 +3,7 @@
     display: flex;
     border: 2px solid blue;
     min-width: -webkit-fill-available;
+    max-height: 70vh;
 }
 
 .topics_panel {
@@ -10,4 +11,6 @@
     border: 1px solid red;
     min-width: 20vh;
     max-width: 30vh;
+    max-height: 100%;
+    overflow: auto;
 }
