@@ -1,24 +1,28 @@
 import React, { useEffect, useState } from 'react';
-import useSWR from 'swr';
 import styles from '../styles/Content.module.css';
-import { getTopics, sendEvent } from '../services/serviceTopic';
-
-const fetcher = (url: RequestInfo) => fetch(url).then((res) => res.json())
+import { sendEvent } from '../services/serviceTopic';
+import { useGetJsonTopicService } from '../services/topics';
 
 export default function Content(props: any) {
-    const [state, setState] = useState("")
+    const [state, setState] = useState<string>("")
+    const [error, setError] = useState<undefined | string>(undefined)
+    const jsonExample = useGetJsonTopicService(props.topic);
+
+    useEffect(() => setState(""), [props.topic]);
 
     function generateExample() {
-        getTopics(props.topic)
-            .then((data: any) =>
-                setState(JSON.stringify(data, null, 4))
-            );
+        setState(JSON.stringify(jsonExample, null, 4))
     }
 
     function send() {
-        sendEvent(props.topic, state);
+        try {
+            sendEvent(props.topic, state);
+        } catch (error: any) {
+            setError(error)
+        }
     }
 
+    if (error) throw new Error(error);
     return (
         <>
             <div className={styles.message_panel}>

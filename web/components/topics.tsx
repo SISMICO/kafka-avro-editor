@@ -2,7 +2,8 @@ import { BaseSyntheticEvent } from 'react';
 import React, { useState } from 'react';
 import styles from '../styles/Topics.module.css'
 import Content from '../components/content'
-import ListTopics from '../components/listTopics'
+import ListTopics from './list-topics'
+import { ErrorBoundary } from './error-boundary';
 
 export default function Topics() {
     const [state, setstate] = useState({ selectedTopic: '' });
@@ -21,18 +22,20 @@ export default function Topics() {
 
     return (
         <>
-            <div className={styles.group}>
-                <div className={styles.topics_panel}>
-                    <h1>Topics</h1>
-                    <div>
-                        <input type="text" onChange={topicFilter}></input>
+            <ErrorBoundary>
+                <div className={styles.group}>
+                    <div className={styles.topics_panel}>
+                        <h1>Topics</h1>
+                        <div>
+                            <input type="text" onChange={topicFilter}></input>
+                        </div>
+                        <ListTopics filter={filter} handleClick={handleClick}></ListTopics>
                     </div>
-                    <ListTopics filter={filter} handleClick={handleClick}></ListTopics>
+                    {state.selectedTopic != "" &&
+                        <Content topic={state.selectedTopic}></Content>
+                    }
                 </div>
-                {state.selectedTopic != "" &&
-                    <Content topic={state.selectedTopic}></Content>
-                }
-            </div>
+            </ErrorBoundary>
         </>
     )
 }
