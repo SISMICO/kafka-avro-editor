@@ -1,18 +1,17 @@
-function getTopics(topic: string) {
-    return fetch(`${process.env.NEXT_PUBLIC_BACKEND_HOST}/json/${topic}`, {
-        method: 'get'
-    })  
-        .then(res => res.json())
-        .catch(console.log);
+async function sendEvent(topic: string, message: string) {
+    try {
+        return await fetch(`${process.env.NEXT_PUBLIC_BACKEND_HOST}/send/${topic}`, {
+            method: 'post',
+            body: message
+        }).then(res => res.text())
+        .catch(
+            ex => {
+                console.log(ex);
+            }
+        )
+    } catch (ex) {
+        console.log(ex);
+    }
 }
 
-function sendEvent(topic: string, message: string) {
-    return fetch(`${process.env.NEXT_PUBLIC_BACKEND_HOST}/send/${topic}`, {
-        method: 'post',
-        body: message
-    })
-        .then(res => res.text())
-        .catch(console.log);
-}
-
-export { getTopics, sendEvent }
+export { sendEvent }
