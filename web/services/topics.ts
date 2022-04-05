@@ -37,4 +37,25 @@ const useGetJsonTopicService = (topic: string) => {
     return result;
 }
 
-export { useGetJsonTopicService, useGetTopicsService };
+export interface SendEventResponse {
+    result?: string,
+    error?: Error
+}
+
+const sendEvent = async (topic: string, message: string): Promise<SendEventResponse> => {
+    let response: SendEventResponse = {};
+
+    await fetch(`${process.env.NEXT_PUBLIC_BACKEND_HOST}/send/${topic}`, {
+        method: 'post',
+        body: message
+    })
+        .then(data => {
+            if (!data.ok) throw new Error(`Error to send event: ${data.status} - ${data.statusText}`);
+            return data.text();
+        })
+        .then(data => response = { result: data })
+        .catch((error: any) => response = { error: error })
+    return response;
+}
+
+export { useGetJsonTopicService, useGetTopicsService, sendEvent };

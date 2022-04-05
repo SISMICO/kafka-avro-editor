@@ -6,18 +6,16 @@ import ListTopics from './list-topics'
 import { ErrorBoundary } from './error-boundary';
 
 export default function Topics() {
-    const [state, setstate] = useState({ selectedTopic: '' });
+    const [state, setState] = useState({ selectedTopic: '' });
     const [filter, setFilter] = useState('');
 
     const handleClick = (e: BaseSyntheticEvent, topic: string) => {
-        setstate({ selectedTopic: topic })
-        console.log(topic);
+        setState({ selectedTopic: topic })
     };
 
     const topicFilter = (event: React.ChangeEvent<HTMLInputElement>) => {
         let value = event.target.value;
         setFilter(value)
-        console.log(value);
     };
 
     return (

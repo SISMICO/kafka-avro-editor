@@ -18,7 +18,11 @@ export class ErrorBoundary extends React.Component<IProps, IState> {
         this.setState({
             error: error,
             errorInfo: errorInfo
-        })
+        });
+    }
+
+    resetState() {
+        this.setState({error: null, errorInfo: null});
     }
 
     render() {
@@ -33,6 +37,7 @@ export class ErrorBoundary extends React.Component<IProps, IState> {
                         <br />
                         <span>Component Strack: {this.state.errorInfo.componentStack}</span>
                     </details>
+                    <button onClick={() => this.resetState()}>Try Again</button>
                 </div>
             );
         }
