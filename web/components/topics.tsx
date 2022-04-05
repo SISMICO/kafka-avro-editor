@@ -25,7 +25,7 @@ export default function Topics() {
                     <div className={styles.topics_panel}>
                         <h1>Topics</h1>
                         <div>
-                            <input type="text" onChange={topicFilter}></input>
+                            <input type="text" placeholder='filter topic' className={styles.filter} onChange={topicFilter}></input>
                         </div>
                         <ListTopics filter={filter} handleClick={handleClick}></ListTopics>
                     </div>

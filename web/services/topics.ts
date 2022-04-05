@@ -24,17 +24,9 @@ export interface JsonTopicResponse {
     error?: Error
 }
 
-const useGetJsonTopicService = (topic: string) => {
-    const [result, setResult] = useState<TopicsResponse>({});
-
-    useEffect(() => {
-        fetch(`${process.env.NEXT_PUBLIC_BACKEND_HOST}/json/${topic}`, { method: 'GET' })
-            .then(data => data.json())
-            .then(data => setResult({ result: data }))
-            .catch((error: any) => setResult({ error: error }))
-    }, [topic]);
-
-    return result;
+const getJsonTopicService = (topic: string) => {
+    return fetch(`${process.env.NEXT_PUBLIC_BACKEND_HOST}/json/${topic}`, { method: 'GET' })
+        .then(data => data.json())
 }
 
 export interface SendEventResponse {
@@ -58,4 +50,4 @@ const sendEvent = async (topic: string, message: string): Promise<SendEventRespo
     return response;
 }
 
-export { useGetJsonTopicService, useGetTopicsService, sendEvent };
+export { getJsonTopicService, useGetTopicsService, sendEvent };

@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import styles from '../styles/Content.module.css';
-import { sendEvent, useGetJsonTopicService } from '../services/topics';
+import { sendEvent, getJsonTopicService } from '../services/topics';
 
 export default function Content(props: any) {
     const [state, setState] = useState<string>("")
     const [error, setError] = useState<undefined | Error>(undefined)
-    const jsonExample = useGetJsonTopicService(props.topic);
+
 
     useEffect(() => setState(""), [props.topic]);
 
     function generateExample() {
-        setState(JSON.stringify(jsonExample.result, null, 4))
+        getJsonTopicService(props.topic)
+            .then(jsonExample => setState(JSON.stringify(jsonExample, null, 4)))
+            .catch(error => setError(error))
     }
 
     function send() {
