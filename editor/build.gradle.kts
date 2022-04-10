@@ -6,11 +6,14 @@ plugins {
     id("org.jlleitschuh.gradle.ktlint") version "10.2.0"
     id("org.jlleitschuh.gradle.ktlint-idea") version "10.2.0"
     id("com.github.johnrengelman.shadow") version "7.1.1"
+    id("org.flywaydb.flyway") version "8.5.7"
 }
 
 group = "br.com.sismico.kafka-avro-editor"
 version = "1.0-SNAPSHOT"
 var logback_version = "1.2.10"
+var ktorm_version = "3.4.1"
+var postgresql_version = "42.3.3"
 
 repositories {
     mavenCentral()
@@ -50,6 +53,12 @@ dependencies {
 
     // Apache Commons Cli
     implementation("commons-cli:commons-cli:1.5.0")
+
+    // KTorm, Flyway + Postgres
+    implementation("org.flywaydb:flyway-core:8.5.7")
+    implementation("org.ktorm:ktorm-core:$ktorm_version")
+    implementation("org.ktorm:ktorm-support-postgresql:$ktorm_version")
+    implementation("org.postgresql:postgresql:$postgresql_version")
 
     testImplementation(kotlin("test"))
 }

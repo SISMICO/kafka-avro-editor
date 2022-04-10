@@ -2,6 +2,7 @@ package api
 
 import editor.Editor
 import editor.Properties
+import editor.TopicSchemaExampleService
 import editor.jsonschema.JsonGenerator
 import editor.kafka.KafkaSender
 import editor.schemaregistry.SchemaRegistry
@@ -24,7 +25,8 @@ fun Application.api(
     editor: Editor = Editor(Properties.outputPath),
     schema: SchemaRegistry = SchemaRegistry(),
     jsonGenerator: JsonGenerator = JsonGenerator(),
-    sender: KafkaSender = KafkaSender()
+    sender: KafkaSender = KafkaSender(),
+    examples: TopicSchemaExampleService = TopicSchemaExampleService()
 ) {
 
     routing {
@@ -39,6 +41,11 @@ fun Application.api(
         get("/json/{topic}") {
             val topic = editor.getTopic(call.parameters["topic"]!!)
             call.respond(jsonGenerator.generate(topic))
+        }
+
+        get("/examples/{topic}") {
+            val topic = call.parameters["topic"]!!
+            call.respond(examples.getExamples(topic))
         }
 
         post("/send/{topic}") {
