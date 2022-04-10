@@ -10,6 +10,7 @@ plugins {
 
 group = "br.com.sismico.kafka-avro-editor"
 version = "1.0-SNAPSHOT"
+var logback_version = "1.2.10"
 
 repositories {
     mavenCentral()
@@ -21,8 +22,9 @@ repositories {
 dependencies {
     implementation("org.apache.avro:avro:1.11.0")
     implementation("org.apache.avro:avro-compiler:1.11.0")
-    implementation("org.slf4j:slf4j-api:1.7.32")
-    implementation("org.slf4j:slf4j-simple:1.7.32")
+    implementation("ch.qos.logback:logback-classic:$logback_version")
+    //implementation("org.slf4j:slf4j-api:1.7.32")
+    //implementation("org.slf4j:slf4j-simple:1.7.32")
 
 //    implementation("com.fasterxml.jackson.core:jackson-databind")
 //    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
