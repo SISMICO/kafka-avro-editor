@@ -18,6 +18,8 @@ import io.ktor.routing.get
 import io.ktor.routing.post
 import io.ktor.routing.routing
 
+data class ResponseOK(val status: String = "OK")
+
 fun Application.api(
     editor: Editor = Editor(Properties.outputPath),
     schema: SchemaRegistry = SchemaRegistry(),
@@ -42,7 +44,7 @@ fun Application.api(
         post("/send/{topic}") {
             val topic = editor.getTopic(call.parameters["topic"]!!)
             sender.send(topic.topic, topic.parse(call.receiveText()))
-            call.respond(HttpStatusCode.OK, "OK")
+            call.respond(HttpStatusCode.OK, ResponseOK())
         }
 
         static("/") {
