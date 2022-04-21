@@ -1,9 +1,12 @@
-package editor.entity
+package editor.database.entity
 
-import org.ktorm.schema.varchar
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import org.ktorm.entity.Entity
+import org.ktorm.jackson.json
 import org.ktorm.schema.Table
+import org.ktorm.schema.varchar
 
+@JsonIgnoreProperties(value = ["entityClass"])
 interface TopicSchema : Entity<TopicSchema> {
     companion object : Entity.Factory<TopicSchema>()
 
@@ -15,5 +18,5 @@ interface TopicSchema : Entity<TopicSchema> {
 object TopicsSchemas : Table<TopicSchema>("topics") {
     val topic = varchar("topic").bindTo(TopicSchema::topic)
     val name = varchar("name").bindTo(TopicSchema::name)
-    val example = varchar("example").bindTo(TopicSchema::example)
+    val example = json<String>("example").bindTo(TopicSchema::example)
 }

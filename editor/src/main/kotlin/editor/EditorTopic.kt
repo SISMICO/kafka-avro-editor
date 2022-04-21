@@ -1,6 +1,7 @@
 package editor
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import editor.compiler.EditorParserException
 import java.io.File
 import java.net.URL
 import java.net.URLClassLoader

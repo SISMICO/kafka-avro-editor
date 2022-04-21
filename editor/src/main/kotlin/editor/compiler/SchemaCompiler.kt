@@ -1,4 +1,4 @@
-package editor
+package editor.compiler
 
 import editor.schemaregistry.SubjectSchema
 import org.apache.avro.Schema

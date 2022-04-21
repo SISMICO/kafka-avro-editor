@@ -1,4 +1,4 @@
-package editor
+package editor.compiler
 
 import java.io.File
 import javax.tools.DiagnosticCollector

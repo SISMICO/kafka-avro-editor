@@ -8,7 +8,7 @@ class SubjectApi(
 ) {
     fun getAllSubjects(): List<String> {
         return request
-            .get("${Properties.schemaRegistryServer}/subjects")
+            .get("${Properties.kafka.schemaRegistryServer}/subjects")
             .responseObject<List<String>>()
             .third
             .fold(

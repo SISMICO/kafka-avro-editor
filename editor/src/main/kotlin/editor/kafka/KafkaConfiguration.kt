@@ -15,13 +15,13 @@ class KafkaConfiguration {
     private val kafkaSaslJaasConfig: String?
 
     init {
-        kafkaServer = editor.Properties.kafkaServer
-        schemaRegistryServer = editor.Properties.schemaRegistryServer
-        schemaRegistryUser = editor.Properties.schemaRegistryUser
-        schemaRegistryPassword = editor.Properties.schemaRegistryPassword
-        kafkaSaslMechanism = editor.Properties.kafkaSaslMechanism
-        kafkaSecurityProtocol = editor.Properties.kafkaSecurityProtocol
-        kafkaSaslJaasConfig = editor.Properties.kafkaSaslJaasConfig
+        kafkaServer = editor.Properties.kafka.kafkaServer
+        schemaRegistryServer = editor.Properties.kafka.schemaRegistryServer
+        schemaRegistryUser = editor.Properties.kafka.schemaRegistryUser
+        schemaRegistryPassword = editor.Properties.kafka.schemaRegistryPassword
+        kafkaSaslMechanism = editor.Properties.kafka.kafkaSaslMechanism
+        kafkaSecurityProtocol = editor.Properties.kafka.kafkaSecurityProtocol
+        kafkaSaslJaasConfig = editor.Properties.kafka.kafkaSaslJaasConfig
     }
 
     fun createProducer(): KafkaProducer<Any, Any> {

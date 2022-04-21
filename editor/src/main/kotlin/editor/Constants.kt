@@ -2,6 +2,11 @@ package editor
 
 class Constants {
     companion object {
+        const val ENV_DATABASE_PASSWORD = "DATABASE_PASSWORD"
+        const val ENV_DATABASE_USER = "DATABASE_USER"
+        const val ENV_DATABASE_DRIVER = "DATABASE_DRIVER"
+        const val ENV_DATABASE_URL = "DATABASE_URL"
+
         const val ENV_KAFKA_SERVER = "KAFKA_SERVER"
         const val ENV_KAFKA_SASL_MECHANISM = "KAFKA_SASL_MECHANISM"
         const val ENV_KAFKA_SASL_JAAS_CONFIG = "KAFKA_SASL_JAAS_CONFIG"

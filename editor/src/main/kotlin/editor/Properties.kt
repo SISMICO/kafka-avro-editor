@@ -1,14 +1,27 @@
 package editor
 
 object Properties {
-    val kafkaServer: String
-    val kafkaSaslMechanism: String?
-    val kafkaSaslJaasConfig: String?
-    val kafkaSecurityProtocol: String?
-    val schemaRegistryServer: String
-    val schemaRegistryUser: String?
-    val schemaRegistryPassword: String?
+    val kafka: KafkaProperties
+    val database: DatabaseProperties
     val outputPath: String
+
+    init {
+        val environments = System.getenv()
+        kafka = KafkaProperties
+        database = DatabaseProperties
+        outputPath = environments.getOrDefault(Constants.ENV_OUTPUT_PATH, "/tmp/kafka-avro-editor")
+    }
+}
+
+object KafkaProperties {
+    var kafkaServer: String
+    var kafkaSaslMechanism: String?
+    var kafkaSaslJaasConfig: String?
+    var kafkaSecurityProtocol: String?
+    var schemaRegistryServer: String
+    var schemaRegistryUser: String?
+    var schemaRegistryPassword: String?
+    var outputPath: String
 
     init {
         val environments = System.getenv()
@@ -20,5 +33,20 @@ object Properties {
         schemaRegistryUser = environments.getOrDefault(Constants.ENV_SCHEMA_REGISTRY_USER, null)
         schemaRegistryPassword = environments.getOrDefault(Constants.ENV_SCHEMA_REGISTRY_PASSWORD, null)
         outputPath = environments.getOrDefault(Constants.ENV_OUTPUT_PATH, "/tmp/kafka-avro-editor")
+    }
+}
+
+object DatabaseProperties {
+    var url: String
+    var driver: String?
+    var user: String?
+    var password: String?
+
+    init {
+        val environments = System.getenv()
+        url = environments.getOrDefault(Constants.ENV_DATABASE_URL, "jdbc:postgresql://localhost:5432/kafka")
+        driver = environments.getOrDefault(Constants.ENV_DATABASE_DRIVER, "org.postgresql.Driver")
+        user = environments.getOrDefault(Constants.ENV_DATABASE_USER, "postgres")
+        password = environments.getOrDefault(Constants.ENV_DATABASE_PASSWORD, "changeit")
     }
 }

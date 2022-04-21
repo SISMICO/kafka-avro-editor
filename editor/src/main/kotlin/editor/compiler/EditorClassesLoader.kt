@@ -1,8 +1,9 @@
-package editor
+package editor.compiler
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.registerKotlinModule
+import editor.EditorTopic
 import java.io.File
 
 class EditorClassesLoader {

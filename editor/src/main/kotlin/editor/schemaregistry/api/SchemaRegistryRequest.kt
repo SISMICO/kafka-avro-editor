@@ -10,10 +10,10 @@ class SchemaRegistryRequest {
     fun get(url: String): Request {
         val request = url.httpGet()
             .header(Headers.ACCEPT, "*/*")
-        Properties.schemaRegistryUser?.let {
+        Properties.kafka.schemaRegistryUser?.let {
             request
                 .authentication()
-                .basic(Properties.schemaRegistryUser, Properties.schemaRegistryPassword.orEmpty())
+                .basic(Properties.kafka.schemaRegistryUser.orEmpty(), Properties.kafka.schemaRegistryPassword.orEmpty())
         }
         return request
     }

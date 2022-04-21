@@ -1,5 +1,8 @@
 package editor
 
+import editor.compiler.EditorClassesLoader
+import editor.compiler.SchemaBuilder
+import editor.compiler.SchemaCompiler
 import editor.schemaregistry.SchemaRegistry
 import editor.schemaregistry.TopicNotFoundException
 import java.io.File

@@ -8,7 +8,7 @@ class SchemaApi(
 ) {
     fun getSchemaFromSchemaRegistry(topic: String): String {
         return request
-            .get("${Properties.schemaRegistryServer}/subjects/$topic-value/versions/latest")
+            .get("${Properties.kafka.schemaRegistryServer}/subjects/$topic-value/versions/latest")
             .responseObject<SchemaRegistryResponse>()
             .third
             .fold(

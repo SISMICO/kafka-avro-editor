@@ -21,32 +21,32 @@ repositories {
 dependencies {
     implementation(project(":editor"))
 
-    implementation("org.apache.avro:avro:1.11.0")
-    implementation("org.apache.avro:avro-compiler:1.11.0")
+//    implementation("org.apache.avro:avro:1.11.0")
+//    implementation("org.apache.avro:avro-compiler:1.11.0")
 
     // Loggin
     implementation("org.slf4j:slf4j-api:1.7.32")
     implementation("ch.qos.logback:logback-classic:1.2.10")
     implementation("ch.qos.logback:logback-core:1.2.10")
 
-    implementation("com.fasterxml.jackson.core:jackson-core:2.12.5")
-    implementation("com.fasterxml.jackson.core:jackson-databind:2.12.5")
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.12.5")
+//    implementation("com.fasterxml.jackson.core:jackson-core:2.12.5")
+//    implementation("com.fasterxml.jackson.core:jackson-databind:2.12.5")
+//    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.12.5")
 
     // Kafka
-    implementation("org.apache.kafka:kafka-clients:2.8.1")
+//    implementation("org.apache.kafka:kafka-clients:2.8.1")
 
     // Confluent
-    implementation("io.confluent:kafka-schema-registry-client:6.1.0")
-    implementation("io.confluent:kafka-streams-avro-serde:6.1.0")
-    implementation("io.confluent:kafka-avro-serializer:5.2.1")
+//    implementation("io.confluent:kafka-schema-registry-client:6.1.0")
+//    implementation("io.confluent:kafka-streams-avro-serde:6.1.0")
+//    implementation("io.confluent:kafka-avro-serializer:5.2.1")
 
     // PODAM
-    implementation("uk.co.jemos.podam:podam:7.2.7.RELEASE")
+//    implementation("uk.co.jemos.podam:podam:7.2.7.RELEASE")
 
     // Fuel
-    implementation("com.github.kittinunf.fuel:fuel:2.3.1")
-    implementation("com.github.kittinunf.fuel:fuel-jackson:2.3.1")
+//    implementation("com.github.kittinunf.fuel:fuel:2.3.1")
+//    implementation("com.github.kittinunf.fuel:fuel-jackson:2.3.1")
 
     // Apache Commons Cli
     implementation("commons-cli:commons-cli:1.5.0")

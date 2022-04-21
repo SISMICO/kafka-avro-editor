@@ -58,6 +58,8 @@ dependencies {
     implementation("org.flywaydb:flyway-core:8.5.7")
     implementation("org.ktorm:ktorm-core:$ktorm_version")
     implementation("org.ktorm:ktorm-support-postgresql:$ktorm_version")
+    implementation("org.ktorm:ktorm-jackson:$ktorm_version")
+
     implementation("org.postgresql:postgresql:$postgresql_version")
 
     testImplementation(kotlin("test"))
