@@ -12,7 +12,7 @@ class RoutesTest {
     @Test
     fun testRoot() {
         withTestApplication(Application::api) {
-            handleRequest(HttpMethod.Get, "/").apply {
+            handleRequest(HttpMethod.Get, "/hello").apply {
                 assertEquals(HttpStatusCode.OK, response.status())
                 assertEquals("Welcome to Kafka Avro Editor API ;)", response.content)
             }

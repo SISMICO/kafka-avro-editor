@@ -25,7 +25,105 @@
 			"response": []
 		},
 		{
+			"name": "Get Json Schema Example",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/examples/topic1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"examples",
+						"topic1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Get Json Schema",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/json/topic1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"json",
+						"topic1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Put Json Schema Example",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"topic\": \"topic1\",\n    \"name\": \"Second Example\",\n    \"example\": \"{\\\"name\\\":\\\"My Second Name\\\",\\\"birthDate\\\":\\\"2022-02-07\\\"}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/examples",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"examples"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Deleete Json Schema Example",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/examples/topic1/Second Example",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"examples",
+						"topic1",
+						"Second Example"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Example from Topic",
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -46,6 +144,35 @@
 		},
 		{
 			"name": "Send Message",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Some Name\",\n    \"birthDate\": \"1985-02-07\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/send/topic10",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"send",
+						"topic10"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Send Message - Generic Topic",
 			"request": {
 				"method": "POST",
 				"header": [],

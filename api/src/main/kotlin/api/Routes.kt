@@ -36,7 +36,7 @@ fun Application.api(
 
     routing {
         get("/hello") {
-            call.respondText("Welcome to Kafka Avro Editor API ;) ${System.getProperty("user.dir")}")
+            call.respondText("Welcome to Kafka Avro Editor API ;)")
         }
 
         get("/topics") {

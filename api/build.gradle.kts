@@ -29,38 +29,10 @@ dependencies {
     implementation("io.ktor:ktor-jackson:1.6.7")
     implementation("io.ktor:ktor-server-netty:1.6.7")
 
-//    implementation("org.apache.avro:avro:1.11.0")
-//    implementation("org.apache.avro:avro-compiler:1.11.0")
     implementation("ch.qos.logback:logback-classic:$logback_version")
     implementation("ch.qos.logback.contrib:logback-json-classic:$logback_json_version")
     implementation("ch.qos.logback.contrib:logback-jackson:$logback_json_version")
     implementation("org.slf4j:slf4j-api:1.7.32")
-    //implementation("org.slf4j:slf4j-simple:1.7.32")
-
-//    implementation("com.fasterxml.jackson.core:jackson-databind")
-//    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-
-//    implementation("com.fasterxml.jackson.core:jackson-core:2.12.5")
-//    implementation("com.fasterxml.jackson.core:jackson-databind:2.12.5")
-//    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.12.5")
-
-    // Kafka
-//    implementation("org.apache.kafka:kafka-clients:2.8.1")
-
-    // Confluent
-//    implementation("io.confluent:kafka-schema-registry-client:6.1.0")
-//    implementation("io.confluent:kafka-streams-avro-serde:6.1.0")
-//    implementation("io.confluent:kafka-avro-serializer:5.2.1")
-
-    // PODAM
-//    implementation("uk.co.jemos.podam:podam:7.2.7.RELEASE")
-
-    // Fuel
-//    implementation("com.github.kittinunf.fuel:fuel:2.3.1")
-//    implementation("com.github.kittinunf.fuel:fuel-jackson:2.3.1")
-
-    // Apache Commons Cli
-//    implementation("commons-cli:commons-cli:1.5.0")
 
     testImplementation(kotlin("test"))
     testImplementation("io.ktor:ktor-client-mock:$ktor_version")
