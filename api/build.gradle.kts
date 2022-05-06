@@ -35,7 +35,7 @@ dependencies {
     implementation("ch.qos.logback.contrib:logback-json-classic:$logback_json_version")
     implementation("ch.qos.logback.contrib:logback-jackson:$logback_json_version")
     implementation("org.slf4j:slf4j-api:1.7.32")
-    //implementation("org.slf4j:slf4j-simple:1.7.32")
+//  implementation("org.slf4j:slf4j-simple:1.7.32")
 
 //    implementation("com.fasterxml.jackson.core:jackson-databind")
 //    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")

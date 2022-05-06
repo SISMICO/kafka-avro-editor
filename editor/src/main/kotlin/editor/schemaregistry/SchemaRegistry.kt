@@ -5,7 +5,6 @@ import editor.schemaregistry.api.SubjectApi
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
-
 class SchemaRegistry(
     private val subjectApi: SubjectApi = SubjectApi(),
     private val schemaApi: SchemaApi = SchemaApi()
