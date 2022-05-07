@@ -12,22 +12,20 @@ import org.ktorm.entity.sequenceOf
 import org.ktorm.entity.toList
 
 class TopicSchemaExampleService(
-    databaseService: DatabaseService
+    private val databaseService: DatabaseService
 ) {
-    private var database: Database = databaseService.getInstance()
+    private fun getDatabase(): Database = databaseService.getInstance()
 
-    fun getExamples(topic: String): List<TopicSchema> {
-        val mylist = database.sequenceOf(TopicsSchemas).filter { it.topic eq topic }.toList()
-        return mylist
-    }
+    fun getExamples(topic: String): List<TopicSchema> =
+        getDatabase().sequenceOf(TopicsSchemas).filter { it.topic eq topic }.toList()
 
     fun addExample(topic: String, name: String, example: String) =
-        database.insert(TopicsSchemas) {
+        getDatabase().insert(TopicsSchemas) {
             set(it.topic, topic)
             set(it.name, name)
             set(it.example, example)
         }
 
     fun removeExample(topic: String, name: String) =
-        database.delete(TopicsSchemas) { (it.topic eq topic) and (it.name eq name) }
+        getDatabase().delete(TopicsSchemas) { (it.topic eq topic) and (it.name eq name) }
 }
