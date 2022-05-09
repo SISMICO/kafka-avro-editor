@@ -14,6 +14,7 @@ version = "1.0-SNAPSHOT"
 var logback_version = "1.2.10"
 var ktorm_version = "3.4.1"
 var postgresql_version = "42.3.3"
+var h2sql_version = "2.1.212"
 
 repositories {
     mavenCentral()
@@ -56,6 +57,7 @@ dependencies {
     implementation("org.ktorm:ktorm-jackson:$ktorm_version")
 
     implementation("org.postgresql:postgresql:$postgresql_version")
+    implementation("com.h2database:h2:$h2sql_version")
 
     testImplementation(kotlin("test"))
 }

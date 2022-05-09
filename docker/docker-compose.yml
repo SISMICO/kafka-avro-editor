@@ -82,3 +82,6 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=changeit
       - POSTGRES_DB=kafka
+
+networks:
+  editor-network:

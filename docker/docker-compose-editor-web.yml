@@ -9,11 +9,20 @@ services:
     hostname: editor-web
     container_name: editor-web
     environment:
-      - SCHEMA_REGISTRY_SERVER=http://localhost:8081
+      - SCHEMA_REGISTRY_SERVER=http://schema-registry:8081
       #- SCHEMA_REGISTRY_USER=some_user
       #- SCHEMA_REGISTRY_PASSWORD=some_password
-      - KAFKA_SERVER=localhost:9092
+      - KAFKA_SERVER=broker:9092
       #- KAFKA_SASL_MECHANISM=PLAIN
       #- KAFKA_SASL_JAAS_CONFIG=org.apache.kafka.common.security.plain.PlainLoginModule required username\="some_user" password\="some_password"\;
       #- KAFKA_SECURITY_PROTOCOL=SASL_SSL
-    network_mode: "host"
+      # - DATABASE_URL=jdbc:h2:mem:test;DB_CLOSE_DELAY=-1
+      # - DATABASE_DRIVER=org.h2.Driver
+      - DATABASE_URL=jdbc:postgresql://postgres:5432/kafka
+      - DATABASE_DRIVER=org.postgresql.Driver
+      - DATABASE_USER=postgres
+      - DATABASE_PASSWORD=changeit
+    ports:
+      - "8080:8080"
+networks:
+  editor-network:

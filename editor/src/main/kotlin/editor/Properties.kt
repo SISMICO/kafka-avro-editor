@@ -37,16 +37,16 @@ object KafkaProperties {
 }
 
 object DatabaseProperties {
-    var url: String?
+    var url: String
     var driver: String?
     var user: String?
     var password: String?
 
     init {
         val environments = System.getenv()
-        url = environments.getOrDefault(Constants.ENV_DATABASE_URL, null)
-        driver = environments.getOrDefault(Constants.ENV_DATABASE_DRIVER, "org.postgresql.Driver")
-        user = environments.getOrDefault(Constants.ENV_DATABASE_USER, "postgres")
-        password = environments.getOrDefault(Constants.ENV_DATABASE_PASSWORD, "changeit")
+        url = environments.getOrDefault(Constants.ENV_DATABASE_URL, "jdbc:h2:mem:test;DB_CLOSE_DELAY=-1")
+        driver = environments.getOrDefault(Constants.ENV_DATABASE_DRIVER, "org.h2.Driver")
+        user = environments.getOrDefault(Constants.ENV_DATABASE_USER, "")
+        password = environments.getOrDefault(Constants.ENV_DATABASE_PASSWORD, "")
     }
 }
