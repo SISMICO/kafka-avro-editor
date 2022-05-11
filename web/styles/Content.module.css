@@ -11,3 +11,7 @@
     width: -webkit-fill-available;
     height: 50vh;
 }
+
+.example_group {
+    float: left;
+}
