@@ -1,14 +1,16 @@
 import { useState } from 'react'
-import Template from '../models/template';
-import styles from '../styles/templates.module.css'
-import { useGetTemplatesService } from '../services/templates';
+import Template from '../../models/template';
+import styles from '../../styles/templates.module.css'
+import { useGetTemplatesService } from '../../services/templates';
 
-interface TemplatesProps {
+export interface TemplatesLoadProps {
     topic: string,
-    handleClick: (template: any) => void
+    message: string,
+    handleClick: (template: any) => void,
+    onCancel: () => void
 }
 
-export default function Templates(props: React.PropsWithChildren<TemplatesProps>) {
+export default function TemplatesLoad(props: React.PropsWithChildren<TemplatesLoadProps>) {
     const [state, setState] = useState({});
     const service = useGetTemplatesService(props.topic);
 
@@ -34,6 +36,7 @@ export default function Templates(props: React.PropsWithChildren<TemplatesProps>
                         )}
                     </select>
                     <button onClick={() => props.handleClick(state)}>Load Template</button>
+                    <button onClick={() => props.onCancel()}>Cancel</button>
                 </div>
             </>
         )

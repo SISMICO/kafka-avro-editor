@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styles from '../styles/Content.module.css';
 import { sendEvent, getJsonTopicService } from '../services/topics';
-import Templates from './templates';
+import Templates from './templates/templates';
 
 export default function Content(props: any) {
     const [state, setState] = useState<string>("")
@@ -37,7 +37,7 @@ export default function Content(props: any) {
                     <div className={styles.example_group}>
                         <button onClick={generateExample}>Generate Example</button>
                     </div>
-                    <Templates topic={props.topic} handleClick={loadTemplate}></Templates>
+                    <Templates topic={props.topic} message={state} handleClick={loadTemplate}></Templates>
                 </div>
                 <div>
                     <textarea

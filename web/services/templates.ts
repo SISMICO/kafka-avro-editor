@@ -19,4 +19,25 @@ const useGetTemplatesService = (topic: string) => {
     return result;
 }
 
-export { useGetTemplatesService };
+const saveTemplatesService = (topic: string, name: string, template: string) => {
+    let result = { result: null, error: null }
+
+    fetch(`${process.env.NEXT_PUBLIC_BACKEND_HOST}/examples`, {
+        method: 'PUT',
+        body: JSON.stringify({
+            topic: topic,
+            name: name,
+            example: template
+        }),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+        .then(data => data.json())
+        .then(data => result.result = data.json())
+        .catch((error: any) => result.error = error)
+
+    return result;
+}
+
+export { useGetTemplatesService, saveTemplatesService };
