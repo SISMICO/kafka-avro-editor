@@ -12,7 +12,7 @@ services:
       - SCHEMA_REGISTRY_SERVER=http://schema-registry:8081
       #- SCHEMA_REGISTRY_USER=some_user
       #- SCHEMA_REGISTRY_PASSWORD=some_password
-      - KAFKA_SERVER=broker:9092
+      - KAFKA_SERVER=broker:29092
       #- KAFKA_SASL_MECHANISM=PLAIN
       #- KAFKA_SASL_JAAS_CONFIG=org.apache.kafka.common.security.plain.PlainLoginModule required username\="some_user" password\="some_password"\;
       #- KAFKA_SECURITY_PROTOCOL=SASL_SSL
@@ -25,4 +25,4 @@ services:
     ports:
       - "8080:8080"
 networks:
-  editor-network:
+  kae-network:

@@ -1,10 +1,10 @@
 ---
 version: '2'
 services:
-  zookeeper:
+  kae-zookeeper:
     image: confluentinc/cp-zookeeper:5.4.0
     hostname: zookeeper
-    container_name: zookeeper
+    container_name: kae-zookeeper
     ports:
       - "2181:2181"
     environment:
@@ -12,13 +12,13 @@ services:
       ZOOKEEPER_TICK_TIME: 2000
     restart: on-failure:3
 
-  broker:
+  kae-broker:
     image: confluentinc/cp-server:5.4.0
     hostname: broker
-    container_name: broker
+    container_name: kae-broker
     restart: on-failure:3
     depends_on:
-      - zookeeper
+      - kae-zookeeper
     ports:
       - "9092:9092"
     environment:
@@ -36,27 +36,27 @@ services:
       CONFLUENT_METRICS_ENABLE: 'true'
       CONFLUENT_SUPPORT_CUSTOMER_ID: 'anonymous'
 
-  schema-registry:
+  kae-schema-registry:
     image: confluentinc/cp-schema-registry:5.4.0
     hostname: schema-registry
-    container_name: schema-registry
+    container_name: kae-schema-registry
     depends_on:
-      - zookeeper
-      - broker
+      - kae-zookeeper
+      - kae-broker
     ports:
       - "8081:8081"
     environment:
       SCHEMA_REGISTRY_HOST_NAME: schema-registry
       SCHEMA_REGISTRY_KAFKASTORE_CONNECTION_URL: 'zookeeper:2181'
 
-  control-center:
+  kae-control-center:
     image: confluentinc/cp-enterprise-control-center:5.4.0
     hostname: control-center
-    container_name: control-center
+    container_name: kae-control-center
     depends_on:
-      - zookeeper
-      - broker
-      - schema-registry
+      - kae-zookeeper
+      - kae-broker
+      - kae-schema-registry
     ports:
       - "9021:9021"
     environment:
@@ -72,10 +72,10 @@ services:
       CONFLUENT_METRICS_TOPIC_REPLICATION: 1
       PORT: 9021
   
-  postgres:
+  kae-postgres:
     image: postgres:14-alpine
     hostname: postgres
-    container_name: postgres
+    container_name: kae-postgres
     ports:
       - "5432:5432"
     environment:
@@ -84,4 +84,4 @@ services:
       - POSTGRES_DB=kafka
 
 networks:
-  editor-network:
+  kae-network:
