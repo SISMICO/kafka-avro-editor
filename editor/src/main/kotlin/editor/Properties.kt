@@ -37,6 +37,7 @@ object KafkaProperties {
 }
 
 object DatabaseProperties {
+    var engine: DatabaseEngine
     var url: String
     var driver: String?
     var user: String?
@@ -44,9 +45,20 @@ object DatabaseProperties {
 
     init {
         val environments = System.getenv()
-        url = environments.getOrDefault(Constants.ENV_DATABASE_URL, "jdbc:h2:mem:test;DB_CLOSE_DELAY=-1")
-        driver = environments.getOrDefault(Constants.ENV_DATABASE_DRIVER, "org.h2.Driver")
+        engine = DatabaseEngine.fromString(environments.getOrDefault(Constants.ENV_DATABASE_ENGINE, "sqlite3"))
+        url = environments.getOrDefault(Constants.ENV_DATABASE_URL, "jdbc:sqlite:/tmp/editor.db")
+        driver = environments.getOrDefault(Constants.ENV_DATABASE_DRIVER, "org.sqlite.JDBC")
         user = environments.getOrDefault(Constants.ENV_DATABASE_USER, "")
         password = environments.getOrDefault(Constants.ENV_DATABASE_PASSWORD, "")
+    }
+}
+
+enum class DatabaseEngine(val engine: String) {
+    PostgreSQL("postgresql"),
+    SQLite3("sqlite3");
+
+    companion object {
+        fun fromString(value: String): DatabaseEngine =
+            DatabaseEngine.values().first { it.engine == value }
     }
 }

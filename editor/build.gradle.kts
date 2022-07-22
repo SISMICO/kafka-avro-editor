@@ -54,10 +54,12 @@ dependencies {
     implementation("org.flywaydb:flyway-core:8.5.7")
     implementation("org.ktorm:ktorm-core:$ktorm_version")
     implementation("org.ktorm:ktorm-support-postgresql:$ktorm_version")
+    implementation("org.ktorm:ktorm-support-sqlite:$ktorm_version")
     implementation("org.ktorm:ktorm-jackson:$ktorm_version")
 
     implementation("org.postgresql:postgresql:$postgresql_version")
-    implementation("com.h2database:h2:$h2sql_version")
+    implementation("org.xerial:sqlite-jdbc:3.36.0.3")
+    implementation("org.junit.jupiter:junit-jupiter:5.8.1")
 
     testImplementation(kotlin("test"))
 }

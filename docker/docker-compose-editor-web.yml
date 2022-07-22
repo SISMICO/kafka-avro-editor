@@ -16,12 +16,14 @@ services:
       #- KAFKA_SASL_MECHANISM=PLAIN
       #- KAFKA_SASL_JAAS_CONFIG=org.apache.kafka.common.security.plain.PlainLoginModule required username\="some_user" password\="some_password"\;
       #- KAFKA_SECURITY_PROTOCOL=SASL_SSL
-      # - DATABASE_URL=jdbc:h2:mem:test;DB_CLOSE_DELAY=-1
-      # - DATABASE_DRIVER=org.h2.Driver
-      - DATABASE_URL=jdbc:postgresql://postgres:5432/kafka
-      - DATABASE_DRIVER=org.postgresql.Driver
-      - DATABASE_USER=postgres
-      - DATABASE_PASSWORD=changeit
+      - DATABASE_ENGINE=sqlite3
+      - DATABASE_URL=jdbc:sqlite:/tmp/editor.db
+      - DATABASE_DRIVER=org.sqlite.JDBC
+      # - DATABASE_ENGINE=postgresql
+      # - DATABASE_URL=jdbc:postgresql://postgres:5432/kafka
+      # - DATABASE_DRIVER=org.postgresql.Driver
+      # - DATABASE_USER=postgres
+      # - DATABASE_PASSWORD=changeit
     ports:
       - "8080:8080"
 networks:

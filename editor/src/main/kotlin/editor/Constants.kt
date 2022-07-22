@@ -6,6 +6,7 @@ class Constants {
         const val ENV_DATABASE_USER = "DATABASE_USER"
         const val ENV_DATABASE_DRIVER = "DATABASE_DRIVER"
         const val ENV_DATABASE_URL = "DATABASE_URL"
+        const val ENV_DATABASE_ENGINE = "DATABASE_ENGINE"
 
         const val ENV_KAFKA_SERVER = "KAFKA_SERVER"
         const val ENV_KAFKA_SASL_MECHANISM = "KAFKA_SASL_MECHANISM"
